@@ -2,13 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 
-// ─── Layout constants ─────────────────────────────────────────────────────────
-const LOGO_W = 220
-const TOPBAR_H = 44
-const NAV_H = 82
-const LOGO_H = TOPBAR_H + NAV_H + 32   // 32px pointed overhang
-const PAD_L = LOGO_W + 24              // 244px — space bars give to the logo
-
 // ─── Nav data — AMESCO ────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -310,17 +303,22 @@ const Lightbox = ({ images, index, onClose, onNav }) => {
   )
 }
 
-// ─── Desktop dropdown panel 
-const Dropdown = ({ items, visible }) => (
-  <div className={`absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 bg-white border border-[#e9ecef] rounded-2xl shadow-[0_16px_48px_rgba(14,7,221,.14)] min-w-[215px] p-2 z-[20] transition-all duration-[220ms]
-    ${visible ? 'opacity-100 visible translate-y-0 pointer-events-auto' : 'opacity-0 invisible translate-y-2.5 pointer-events-none'}`}
+// ─── Desktop dropdown panel ────────────────────────────────────────────────────
+const Dropdown = ({ items, visible, onMouseEnter, onMouseLeave }) => (
+  <div
+    className={`absolute top-[calc(100%+2px)] left-1/2 -translate-x-1/2 bg-white border border-[#e9ecef] rounded-2xl shadow-[0_16px_48px_rgba(14,7,221,.14)] min-w-[215px] p-2 z-[20] transition-all duration-[200ms]
+      ${visible ? 'opacity-100 visible translate-y-0 pointer-events-auto' : 'opacity-0 invisible translate-y-2.5 pointer-events-none'}`}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
   >
+    {/* invisible bridge fills the gap between trigger and panel so mouse doesn't leave */}
+    <div className="absolute -top-[10px] left-0 right-0 h-[10px]"/>
     {/* caret */}
     <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 rotate-45 w-3 h-3 bg-white border-l border-t border-[#e9ecef]"/>
     {items.map(item => (
       <NavLink key={item.to} to={item.to} end={item.to === '/'}
         className={({ isActive }) =>
-          `flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 group no-underline
+          `flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 group no-underline
            ${isActive
              ? 'text-[#0e07dd] bg-[#0e07dd]/[0.06] pl-5'
              : 'text-[#343a40] hover:text-[#0e07dd] hover:bg-[#0e07dd]/[0.06] hover:pl-5'}`
@@ -328,7 +326,7 @@ const Dropdown = ({ items, visible }) => (
       >
         {({ isActive }) => (
           <>
-            <span className={`w-[5px] h-[5px] rounded-full flex-shrink-0 transition-colors duration-200
+            <span className={`w-[5px] h-[5px] rounded-full flex-shrink-0 transition-colors duration-150
               ${isActive ? 'bg-[#E63946]' : 'bg-[#dee2e6] group-hover:bg-[#E63946]'}`}/>
             {item.label}
           </>
@@ -338,18 +336,30 @@ const Dropdown = ({ items, visible }) => (
   </div>
 )
 
-// ─── Desktop nav item 
+// ─── Desktop nav item ─────────────────────────────────────────────────────────
 const DesktopNavItem = ({ link }) => {
-  const hasKids = Boolean(link.children?.length)
+  const hasKids  = Boolean(link.children?.length)
   const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const closeTimer = useRef(null)
 
-  useEffect(() => {
-    if (!open) return
-    const fn = e => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
-    document.addEventListener('mousedown', fn)
-    return () => document.removeEventListener('mousedown', fn)
-  }, [open])
+  const clearClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+  }
+
+  // Schedule close with a delay — cancelled if cursor re-enters
+  const scheduleClose = () => {
+    clearClose()
+    closeTimer.current = setTimeout(() => setOpen(false), 120)
+  }
+
+  const handleEnter = () => { clearClose(); setOpen(true) }
+  const handleLeave = () => scheduleClose()
+
+  // Cleanup on unmount
+  useEffect(() => () => clearClose(), [])
 
   if (!hasKids) {
     return (
@@ -365,9 +375,10 @@ const DesktopNavItem = ({ link }) => {
   }
 
   return (
-    <div ref={ref} className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+    <div
+      className="relative"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
     >
       <NavLink to={link.to}
         className={({ isActive }) =>
@@ -380,7 +391,12 @@ const DesktopNavItem = ({ link }) => {
         {link.label}
         <IcoChevron open={open}/>
       </NavLink>
-      <Dropdown items={link.children} visible={open}/>
+      <Dropdown
+        items={link.children}
+        visible={open}
+        onMouseEnter={handleEnter}
+        onMouseLeave={handleLeave}
+      />
     </div>
   )
 }
@@ -459,7 +475,7 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
       <div className="flex items-center gap-4">
         <div className="flex-shrink-0 w-14 h-14">
           {logo
-            ? <img src={logo} alt="AMESCO" className="w-full h-full object-contain brightness-0 invert"/>
+            ? <img src={logo} alt="AMESCO" className="w-full h-full object-contain drop-shadow-sm"/>
             : <ShieldMark/>
           }
         </div>
@@ -618,46 +634,34 @@ const Navbar = () => {
       <div className="sticky top-0 z-[997] overflow-visible">
         <div className="relative">
 
-          {/* ════ LOGO BLOCK — pentagon, spans both bars ════ */}
-          <div
-            className="absolute left-0 top-0 z-[15] bg-[#261481] flex flex-col items-center justify-center gap-1.5 shadow-[4px_0_20px_rgba(38,20,129,.25)] [clip-path:polygon(0_0,100%_0,100%_80%,50%_100%,0_80%)]"
-            style={{ width: LOGO_W, height: LOGO_H, paddingBottom: 28 }}
-          >
-            <div className="w-[52px] h-[52px] flex-shrink-0">
-              {logo
-                ? <img src={logo} alt="AMESCO" className="w-full h-full object-contain brightness-0 invert"/>
-                : <ShieldMark/>
-              }
-            </div>
-            <div className="text-center leading-none">
-              <p className="text-[10px] font-bold text-white/60 tracking-[2px] uppercase mb-1 hidden sm:block">
-                SCHOOL OF
-              </p>
-              <p className="font-['Playfair_Display'] text-[13px] sm:text-[14px] font-black text-white tracking-[1.5px] uppercase">
-                AMESCO
-              </p>
-            </div>
-          </div>
+          {/* ════ LOGO — absolutely positioned over both bars, no background ════ */}
+          <Link to="/" className="absolute left-22 top-0 z-[15] h-[126px] flex items-center no-underline">
+            {logo
+              ? <img src={logo} alt="AMESCO" className="h-[120px] w-auto object-contain drop-shadow-lg"/>
+              : <ShieldMark/>
+            }
+          </Link>
 
-          {/* ════ TOP BAR ════ */}
+          {/* ════ TOP BAR — visible on ALL screens, quick links wrap on mobile ════ */}
           <div
-            className="bg-[#261481] hidden md:flex items-center justify-between pr-6"
-            style={{ height: TOPBAR_H, paddingLeft: PAD_L }}
+            className="bg-[#261481] flex items-center justify-between flex-wrap gap-y-1
+              min-h-[44px] pl-[244px] pr-4 md:pr-6 py-1 md:py-0"
           >
-            {/* Welcome text */}
-            <div className="flex items-center gap-2.5">
+            {/* Welcome text — hidden on small screens */}
+            <div className="hidden md:flex items-center gap-2.5">
               <IcoGradCap/>
               <span className="text-[13px] font-semibold text-white/85 whitespace-nowrap">
                 Welcome to Armed Forces Senior High Technical School, Kumasi
               </span>
             </div>
-            {/* Quick links */}
-            <div className="flex items-center flex-shrink-0">
+
+            {/* Quick links — always visible, wrap on small screens */}
+            <div className="flex items-center flex-wrap justify-center md:justify-end w-full md:w-auto">
               {QUICK_LINKS.map(link => (
                 <NavLink key={link.to} to={link.to}
                   className={({ isActive }) =>
-                    `text-[12.5px] font-medium px-3.5 border-r border-white/[0.18] last:border-r-0 no-underline whitespace-nowrap transition-colors duration-200
-                     ${isActive ? 'text-white' : 'text-white/65 hover:text-white'}`
+                    `text-[12.5px] font-medium px-3 md:px-3.5 py-0.5 border-r border-white/[0.18] last:border-r-0 no-underline whitespace-nowrap transition-colors duration-200
+                     ${isActive ? 'text-white font-semibold' : 'text-white/70 hover:text-white'}`
                   }
                 >
                   {link.label}
@@ -668,9 +672,9 @@ const Navbar = () => {
 
           {/* ════ MAIN NAV ════ */}
           <div
-            className={`bg-white flex items-center justify-between pr-6 relative z-[9] transition-shadow duration-300
+            className={`bg-white h-[82px] pl-[244px] pr-6 flex items-center justify-between
+              relative z-[9] transition-shadow duration-300
               ${scrolled ? 'shadow-[0_4px_28px_rgba(14,7,221,.12)]' : 'shadow-[0_2px_10px_rgba(14,7,221,.06)]'}`}
-            style={{ height: NAV_H, paddingLeft: PAD_L }}
           >
             {/* Desktop nav links */}
             <nav className="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
@@ -680,7 +684,7 @@ const Navbar = () => {
             {/* Right controls */}
             <div className="flex items-center gap-2.5 flex-shrink-0 ml-auto">
 
-              {/* Mobile hamburger (nav links) */}
+              {/* Mobile hamburger — only on small screens */}
               <button
                 className="lg:hidden w-10 h-10 rounded-lg bg-transparent border border-[#dee2e6] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#0e07dd]/[0.06] hover:border-[#0e07dd]"
                 onClick={() => setMobNavOpen(v => !v)}
@@ -689,8 +693,8 @@ const Navbar = () => {
                 <IcoHamburger open={mobNavOpen}/>
               </button>
 
-              {/* Search button + compact dropdown */}
-              <div ref={searchRef} className="relative">
+              {/* Search button + compact dropdown — hidden on small screens */}
+              <div ref={searchRef} className="relative hidden md:block">
                 <button
                   onClick={() => setSearchOpen(v => !v)}
                   aria-label="Search" aria-expanded={searchOpen}
@@ -703,11 +707,10 @@ const Navbar = () => {
                   <IcoSearch/>
                 </button>
 
-                {/* ── Compact search dropdown ── */}
+                {/* Compact search dropdown */}
                 <div className={`absolute top-[calc(100%+10px)] right-0 w-80 bg-white border border-[#e9ecef] rounded-2xl shadow-[0_12px_40px_rgba(14,7,221,.13)] p-3 z-50 transition-all duration-[220ms]
                   ${searchOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none invisible'}`}
                 >
-                  {/* caret */}
                   <div className="absolute -top-[6px] right-4 w-3 h-3 rotate-45 bg-white border-l border-t border-[#e9ecef]"/>
                   <div className="flex items-center gap-2 bg-[#f8f9fa] rounded-xl px-3 py-2.5 border border-[#e9ecef] focus-within:border-[#0e07dd] focus-within:bg-white transition-all duration-200">
                     <IcoSearch/>
@@ -726,19 +729,17 @@ const Navbar = () => {
                         className="text-[#9ca3af] hover:text-[#343a40] text-xs leading-none transition-colors">✕</button>
                     )}
                   </div>
-                  <button
-                    className="mt-2 w-full bg-[#0e07dd] text-white text-sm font-bold py-2.5 rounded-xl transition-colors duration-200 hover:bg-[#261481]"
-                  >
+                  <button className="mt-2 w-full bg-[#0e07dd] text-white text-sm font-bold py-2.5 rounded-xl transition-colors duration-200 hover:bg-[#261481]">
                     Search
                   </button>
                 </div>
               </div>
 
-              {/* ≡ Menu → opens red info panel */}
+              {/* ≡ Info panel button — hidden on small screens */}
               <button
                 onClick={() => setInfoOpen(v => !v)}
                 aria-label="Open info panel" aria-expanded={infoOpen}
-                className={`w-10 h-10 rounded-lg border flex items-center justify-center cursor-pointer transition-all duration-200
+                className={`hidden md:flex w-10 h-10 rounded-lg border items-center justify-center cursor-pointer transition-all duration-200
                   ${infoOpen
                     ? 'bg-[#0e07dd] border-[#0e07dd] text-white'
                     : 'bg-transparent border-[#dee2e6] text-[#343a40] hover:bg-[#0e07dd]/[0.06] hover:border-[#0e07dd] hover:text-[#0e07dd]'
@@ -747,7 +748,7 @@ const Navbar = () => {
                 <IcoMenu/>
               </button>
 
-              {/* Apply Now pill */}
+              {/* Apply Now pill — desktop only */}
               <Link
                 to="/admissions/apply"
                 className="hidden lg:inline-flex apply-ring items-center gap-2 bg-[#E63946] text-white px-6 py-2.5 rounded-full text-sm font-bold no-underline transition-all duration-200 hover:bg-[#c1121f] hover:-translate-y-0.5 hover:shadow-none flex-shrink-0"
@@ -775,57 +776,98 @@ const Navbar = () => {
         onImgClick={i => setLbIndex(i)}
       />
 
-      {/* ══ LEFT MOBILE NAV  */}
+      {/* ══ RIGHT MOBILE NAV ══════════════════════════════════════════════════
+           – hidden on lg+ (desktop has inline nav)
+           – slides in from the RIGHT
+           – external "✕" close button floats at the top-left edge of the drawer
+      ══════════════════════════════════════════════════════════════════════ */}
       <nav
-        className={`fixed top-0 left-0 bottom-0 w-[min(320px,88vw)] bg-gradient-to-br from-[#0a0850] to-[#261481] z-[1001]
-          overflow-y-auto flex flex-col transition-transform duration-[380ms] ease-[cubic-bezier(0.32,0,0,1)]
-          ${mobNavOpen ? 'translate-x-0' : '-translate-x-full'}`}
-        aria-label="Mobile navigation" aria-hidden={!mobNavOpen}
+        className={`lg:hidden fixed top-0 right-0 bottom-0 w-[min(320px,88vw)]
+          bg-gradient-to-br from-[#0a0850] to-[#261481] z-[1001]
+          overflow-y-auto flex flex-col
+          transition-transform duration-[380ms] ease-[cubic-bezier(0.32,0,0,1)]
+          ${mobNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        aria-label="Mobile navigation"
+        aria-hidden={!mobNavOpen}
       >
-        {/* Header */}
+        {/* ── External close button — floats at top-left edge of drawer ── */}
+        <button
+          onClick={() => setMobNavOpen(false)}
+          aria-label="Close navigation"
+          className="absolute top-0 -left-[50px] w-[50px] h-[50px] bg-[#261481] border-none
+            flex items-center justify-center text-white text-lg font-bold cursor-pointer z-10
+            shadow-[-4px_0_14px_rgba(0,0,0,.25)]
+            transition-all duration-200 hover:bg-[#E63946]"
+        >
+          ✕
+        </button>
+
+        {/* ── Drawer header ── */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 flex-shrink-0">
-          <Link to="/" onClick={() => setMobNavOpen(false)}
-            className="flex items-center gap-2.5 no-underline">
+          <Link
+            to="/"
+            onClick={() => setMobNavOpen(false)}
+            className="flex items-center gap-2.5 no-underline"
+          >
             <div className="w-9 h-9 bg-white/10 rounded-[9px] flex items-center justify-center overflow-hidden flex-shrink-0">
               {logo
-                ? <img src={logo} alt="AMESCO" className="w-6 h-6 object-contain brightness-0 invert"/>
-                : <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                ? <img src={logo} alt="AMESCO" className="w-6 h-6 object-contain drop-shadow-sm"/>
+                : <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none"
+                    stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                  </svg>
               }
             </div>
             <p className="font-['Playfair_Display'] text-[14px] font-black text-white">
               <span className="text-[#E63946]">Armed Forces</span> SHS
             </p>
           </Link>
-          <button onClick={() => setMobNavOpen(false)} aria-label="Close"
-            className="w-8 h-8 bg-white/10 rounded-lg border-none text-white text-sm cursor-pointer flex items-center justify-center flex-shrink-0">
+
+          {/* Inner close (top-right inside drawer) */}
+          <button
+            onClick={() => setMobNavOpen(false)}
+            aria-label="Close"
+            className="w-8 h-8 bg-white/10 rounded-lg border-none text-white text-sm
+              cursor-pointer flex items-center justify-center flex-shrink-0
+              transition-colors duration-200 hover:bg-[#E63946]"
+          >
             ✕
           </button>
         </div>
 
-        {/* Links */}
+        {/* ── Nav links ── */}
         <div className="flex-1 overflow-y-auto py-2">
           {NAV_LINKS.map(link => (
-            <MobileNavItem key={link.to} link={link} onClose={() => setMobNavOpen(false)}/>
+            <MobileNavItem
+              key={link.to}
+              link={link}
+              onClose={() => setMobNavOpen(false)}
+            />
           ))}
         </div>
 
-        {/* Footer */}
+        {/* ── Footer ── */}
         <div className="px-6 py-5 border-t border-white/10 flex-shrink-0 space-y-3">
-          {/* Motto */}
           <div className="bg-[#E63946]/15 border border-[#E63946]/30 rounded-xl p-3 text-center">
             <p className="text-[10px] text-white/40 tracking-[1.2px] uppercase">School Motto</p>
             <p className="font-['Playfair_Display'] text-sm font-bold text-white mt-1">
               "Mmarima Mma" — <span className="text-[#E63946]">Excellence</span>
             </p>
           </div>
-          <Link to="/admissions/apply" onClick={() => setMobNavOpen(false)}
-            className="flex items-center justify-center gap-2 w-full bg-[#E63946] text-white py-3.5 rounded-full text-sm font-bold no-underline">
+          <Link
+            to="/admissions/apply"
+            onClick={() => setMobNavOpen(false)}
+            className="flex items-center justify-center gap-2 w-full bg-[#E63946] text-white
+              py-3.5 rounded-full text-sm font-bold no-underline
+              transition-colors duration-200 hover:bg-[#c1121f]"
+          >
             Apply Now <IcoArrow/>
           </Link>
         </div>
       </nav>
 
-      {/* ══ LIGHTBOX  */}
+      {/* ══ LIGHTBOX ══════════════════════════════════════════════════════════ */}
       {lbIndex !== null && (
         <Lightbox
           images={GALLERY}
