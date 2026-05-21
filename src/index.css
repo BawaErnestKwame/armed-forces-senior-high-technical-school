@@ -16,3 +16,19 @@
     --danger: #e74c3c;
     --info: #3498db;
 }
+
+body {
+   background-color: #ffffff;
+  background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.bgStyle {
+      background-color: #ffffff;
+  background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
+}

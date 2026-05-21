@@ -8,8 +8,8 @@ import About       from './About'
 import Departments from './Departments'
 import SchoolLifebanner  from './SchoolLifebanner'
 import SchoolLife   from './Schoolife'
-// import Teachers    from './Teachers'
-// import Programs    from './Programs'
+import Teachers    from './Teachers'
+import Programs    from './Programs'
 // import Testimonials from './Testimonials'
 // import Blog        from './Blog'
 // import Admissions  from './Admissions'
@@ -23,8 +23,8 @@ const Home = () => {
       <Departments /> 
       <SchoolLifebanner  />  
       <SchoolLife   />
-      {/* <Teachers />     */}
-      {/* <Programs />     */}
+      <Teachers />    
+      <Programs />    
       {/* <Testimonials /> */}
       {/* <Blog />         */}
       {/* <Admissions />   */}

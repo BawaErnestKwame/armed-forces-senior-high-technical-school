@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import whitelogo from  '../assets/white_logo.png'
 
 // ─── Slide data — AMESCO ──────────────────────────────────────────────────────
 const SLIDES = [
@@ -218,8 +218,8 @@ const Hero = () => {
             {/* Logo mark — big watermark inline */}
             <div className="flex-shrink-0 opacity-80"
               style={{ width: 'clamp(52px, 7vw, 90px)', height: 'clamp(52px, 7vw, 90px)' }}>
-              {logo
-                ? <img src={logo} alt="" className="w-full h-full object-contain drop-shadow-2xl" aria-hidden="true"/>
+              {whitelogo
+                ? <img src={whitelogo} alt="" className="w-full h-full object-contain drop-shadow-2xl" aria-hidden="true"/>
                 : (
                   <svg viewBox="0 0 52 56" fill="none" className="w-full h-full">
                     <path d="M26 2L4 11v20c0 14 11 23 22 25 11-2 22-11 22-25V11L26 2z"

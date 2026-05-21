@@ -2,13 +2,18 @@
 import React, { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-// ─── Color tokens ─────────────────────────────────────────────────────────────
+// ─── Your color tokens ────────────────────────────────────────────────────────
 const C = {
-  accentRed:     '#E63946',
-  accentRedDark: '#c1121f',
-  royalBlueDark: '#261481',
-  darkGray:      '#343a40',
-  bodyText:      '#4b5563',
+  accentRed:      '#E63946',
+  accentRedDark:  '#c1121f',
+  accentRedLight: '#f28482',
+  royalBlue:      '#0e07dd',
+  royalBlueDark:  '#261481',
+  royalBlueLight: '#5a7ae8',
+  white:          '#FFFFFF',
+  lightGray:      '#f8f9fa',
+  mediumGray:     '#e9ecef',
+  darkGray:       '#343a40',
 }
 
 // ─── Notice data ──────────────────────────────────────────────────────────────
@@ -64,11 +69,18 @@ const IcoPdf = () => (
   </svg>
 )
 
+const IcoArrow = () => (
+  <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="2" y1="8" x2="14" y2="8"/>
+    <polyline points="9,3 14,8 9,13"/>
+  </svg>
+)
+
 // ─── SchoolLife ───────────────────────────────────────────────────────────────
 const SchoolLife = () => {
   const videoRef = useRef(null)
 
-  // Ensure video plays on mount (some browsers block autoplay)
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch(() => {})
@@ -78,57 +90,73 @@ const SchoolLife = () => {
   return (
     <section className="relative w-full overflow-hidden" style={{ minHeight: 520 }}>
 
-      {/* ══ VIDEO BACKGROUND ════════════════════════════════════════════════ */}
+      {/* ── Video background — African/Ghana students in school ── */}
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80"
+        autoPlay muted loop playsInline
+        poster="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=85"
       >
         {/*
-          Replace src with your own school video file for production.
-          Using a royalty-free stock video for development.
+          ─── HOW TO USE YOUR OWN VIDEO ───────────────────────────────────────
+          For a real Ghana/African school student video, download one of these
+          free stock clips and place it in your /public/videos/ folder:
+
+          1. Mixkit — African students in school uniform (free, no signup):
+             https://mixkit.co/free-stock-video/kids-running-in-slow-motion-44/
+             → Save as: /public/videos/school-life.mp4
+
+          2. Pexels — African school video (free):
+             https://www.pexels.com/search/videos/african%20school/
+             → Download any clip → Save as: /public/videos/school-life.mp4
+
+          Then replace the src below with:
+             src="/videos/school-life.mp4"
+          ─────────────────────────────────────────────────────────────────────
         */}
         <source
-          src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4"
+          src="https://assets.mixkit.co/videos/preview/mixkit-students-walking-towards-a-school-building-4519-large.mp4"
           type="video/mp4"
         />
-        {/* Fallback: if video fails, the poster image shows */}
+        <source
+          src="https://assets.mixkit.co/videos/preview/mixkit-girl-in-school-taking-notes-in-classroom-2893-large.mp4"
+          type="video/mp4"
+        />
       </video>
 
-      {/* ══ CRIMSON OVERLAY ═════════════════════════════════════════════════ */}
+      {/* ── Light blue overlay — reduced opacity so video is clearly visible ── */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            'linear-gradient(135deg, rgba(139,26,47,.82) 0%, rgba(193,18,31,.72) 50%, rgba(100,10,20,.85) 100%)',
+          background: `linear-gradient(135deg,
+            rgba(38,20,129,.45) 0%,
+            rgba(14,7,221,.30) 50%,
+            rgba(38,20,129,.50) 100%)`,
         }}
       />
 
-      {/* ══ CONTENT ═════════════════════════════════════════════════════════ */}
+      {/* ── Content ── */}
       <div
-        className="relative z-10 max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8
-          flex items-center justify-end"
+        className="relative z-10 max-w-[1220px] mx-auto flex items-center justify-end"
         style={{ minHeight: 520, padding: '60px 24px' }}
       >
 
-        {/* ── Notice card — floats on the right ── */}
+        {/* Notice card */}
         <div
-          className="w-full max-w-[380px] bg-white rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 24px 60px rgba(0,0,0,.25)' }}
+          className="w-full max-w-[380px] rounded-2xl overflow-hidden"
+          style={{
+            background:  C.white,
+            boxShadow:   '0 24px 60px rgba(0,0,0,.25)',
+          }}
         >
-          {/* Card header */}
+          {/* Header */}
           <div className="px-7 pt-6 pb-4">
             <div className="flex items-center gap-2.5">
-              {/* Pulsing red dot */}
               <span
                 className="w-3 h-3 rounded-full flex-shrink-0"
                 style={{
                   background: C.accentRed,
-                  boxShadow:  `0 0 0 3px rgba(230,57,70,.2)`,
+                  boxShadow:  `0 0 0 3px rgba(230,57,70,.18)`,
                 }}
               />
               <h3
@@ -140,37 +168,38 @@ const SchoolLife = () => {
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="h-px mx-7" style={{ background: '#f0f0f0' }}/>
+          <div className="h-px mx-7" style={{ background: C.mediumGray }}/>
 
-          {/* Notice list */}
-          <div className="divide-y divide-[#f3f4f6]">
+          {/* Notice rows */}
+          <div className="divide-y" style={{ borderColor: C.lightGray }}>
             {NOTICES.map(notice => (
               <div
                 key={notice.id}
                 className="px-7 py-4 flex items-start justify-between gap-4
-                  group transition-colors duration-200 hover:bg-[#fdf0f0]"
+                  group cursor-pointer transition-colors duration-200"
+                style={{ '--hover-bg': `rgba(230,57,70,.04)` }}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(230,57,70,.04)'}
+                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
-                {/* Text */}
                 <div className="flex-1 min-w-0">
                   <p
-                    className="text-[13.5px] font-bold leading-snug mb-2 group-hover:text-[#E63946]
+                    className="text-[13.5px] font-bold leading-snug mb-2
                       transition-colors duration-200"
                     style={{ color: C.darkGray }}
+                    onMouseEnter={e => e.currentTarget.style.color = C.accentRed}
+                    onMouseLeave={e => e.currentTarget.style.color = C.darkGray}
                   >
                     {notice.title}
                   </p>
 
-                  {/* Date */}
                   <div
                     className="flex items-center gap-1.5 text-[12px] mb-1"
-                    style={{ color: C.bodyText }}
+                    style={{ color: '#6b7280' }}
                   >
                     <IcoCalendar/>
                     <span>{notice.date}</span>
                   </div>
 
-                  {/* Reference */}
                   <p
                     className="text-[11.5px] font-medium truncate"
                     style={{ color: '#9ca3af' }}
@@ -179,7 +208,7 @@ const SchoolLife = () => {
                   </p>
                 </div>
 
-                {/* PDF download icon */}
+                {/* PDF icon */}
                 <a
                   href={notice.pdf}
                   aria-label={`Download ${notice.title}`}
@@ -194,26 +223,23 @@ const SchoolLife = () => {
             ))}
           </div>
 
-          {/* Card footer — view all link */}
-          <div className="px-7 py-4 border-t border-[#f3f4f6]">
+          {/* Footer */}
+          <div
+            className="px-7 py-4 border-t"
+            style={{ borderColor: C.mediumGray }}
+          >
             <Link
               to="/news/notices"
-              className="inline-flex items-center gap-1.5 text-[13px] font-bold no-underline
-                transition-colors duration-200"
+              className="inline-flex items-center gap-1.5 text-[13px] font-bold
+                no-underline transition-colors duration-200"
               style={{ color: C.accentRed }}
-              onMouseEnter={e => e.currentTarget.style.color = C.accentRedDark}
+              onMouseEnter={e => e.currentTarget.style.color = C.royalBlueDark}
               onMouseLeave={e => e.currentTarget.style.color = C.accentRed}
             >
-              View All Notices
-              <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="2" y1="8" x2="14" y2="8"/>
-                <polyline points="9,3 14,8 9,13"/>
-              </svg>
+              View All Notices <IcoArrow/>
             </Link>
           </div>
         </div>
-
       </div>
     </section>
   )
