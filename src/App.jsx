@@ -1,10 +1,10 @@
 // src/App.jsx — example usage of Footer + ScrollToTop
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Navbar     from './component/common/Navbar'
-import Footer     from './component/common/Footer'
+import Navbar from './component/common/Navbar'
+import Footer from './component/common/Footer'
 import { ScrollToTop } from './component/common/Footer'
-import Home       from './component/Home'
+import Home from "./component/Home"
 
 const App = () => (
   <>
