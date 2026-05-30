@@ -245,7 +245,7 @@ const Footer = () => (
             </div>
             <div>
               <p className="font-['Playfair_Display'] text-[17px] font-black text-white leading-none">
-                <span style={{ color: C.accentRed }}>Armed Forces</span> SHS
+                <span style={{ color: C.accentRed }}>Armed Forces</span> SHTS
               </p>
               <p className="text-[10px] font-semibold mt-1 tracking-[.8px] uppercase"
                 style={{ color: 'rgba(255,255,255,.4)' }}>
@@ -256,22 +256,11 @@ const Footer = () => (
 
           <p className="text-[13.5px] leading-[1.8] mb-5"
             style={{ color: 'rgba(255,255,255,.45)' }}>
-            Armed Forces Senior High Technical School, Kumasi — established 1991.
+            Armed Forces Senior High Technical School, Kumasi
             Building disciplined, brilliant, and globally competitive students.
           </p>
 
-          {/* Gallery grid */}
-          <div className="grid grid-cols-3 gap-1.5 mb-5">
-            {GALLERY_IMGS.map((src, i) => (
-              <div key={i} className="aspect-square rounded-lg overflow-hidden group cursor-pointer">
-                <img
-                  src={src} alt=""
-                  className="w-full h-full object-cover transition-all duration-400
-                    group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
-                />
-              </div>
-            ))}
-          </div>
+         
 
           {/* Contact mini */}
           <div className="flex flex-col gap-2.5">
@@ -382,9 +371,8 @@ const Footer = () => (
               style={{ color: 'rgba(255,255,255,.3)' }}>
               School Motto
             </p>
-            <p className="font-['Playfair_Display'] text-[14px] font-bold text-white">
-              "Mmarima Mma" —{' '}
-              <span style={{ color: C.accentRed }}>Excellence</span>
+            <p className="font-['Playfair_Display'] uppercase text-[14px] font-bold text-white">
+            Service With Humanity
             </p>
           </div>
         </div>
