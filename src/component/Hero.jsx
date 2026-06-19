@@ -1,40 +1,40 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import whitelogo from  '../assets/white_logo.png'
 
-// ─── Slide data — AMESCO ──────────────────────────────────────────────────────
+// ─── Slide data — AMESCO 
+
 const SLIDES = [
   {
     id: 1,
-    bg: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=85',
-    eyebrow: 'Welcome To AMESCO',
-    line1: 'Excellence in',
-    line2: 'Education',
-    sub: 'Armed Forces Senior High Technical School, Kumasi — shaping disciplined, brilliant minds since 1991.',
-    cta: { label: 'Join Our School', to: '/admissions/apply' },
-    ctaSecondary: { label: 'Explore Programmes', to: '/academics' },
+    bg: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=85",
+    eyebrow: "Welcome To AMESCO",
+    line1: "Excellence in",
+    line2: "Education",
+    sub: "Armed Forces Senior High Technical School, Kumasi — shaping disciplined, brilliant minds since 1991.",
+    cta: { label: "Join Our School", to: "/admissions/apply" },
+    ctaSecondary: { label: "Explore Programmes", to: "/academics" },
   },
   {
     id: 2,
-    bg: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=85',
-    eyebrow: 'Academic Programmes',
-    line1: 'Seven Pathways',
-    line2: 'to Greatness',
-    sub: 'From General Science to Technical programmes — find your calling and unlock your full potential.',
-    cta: { label: 'View Academics', to: '/academics' },
-    ctaSecondary: { label: 'Apply Now', to: '/admissions/apply' },
+    bg: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=85",
+    eyebrow: "Academic Programmes",
+    line1: "Seven Pathways",
+    line2: "to Greatness",
+    sub: "From General Science to Technical programmes — find your calling and unlock your full potential.",
+    cta: { label: "View Academics", to: "/academics" },
+    ctaSecondary: { label: "Apply Now", to: "/admissions/apply" },
   },
   {
     id: 3,
-    bg: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1600&q=85',
-    eyebrow: 'Campus Life',
-    line1: 'Discipline,',
-    line2: 'Character & Growth',
-    sub: 'A vibrant campus community that builds resilience, leadership, and a lifelong passion for learning.',
-    cta: { label: 'Explore School Life', to: '/school-life' },
-    ctaSecondary: { label: 'Gallery', to: '/school-life/gallery' },
+    bg: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1600&q=85",
+    eyebrow: "Campus Life",
+    line1: "Discipline,  ",
+    line2: "Character & Growth",
+    sub: "A vibrant campus community that builds resilience, leadership, and a lifelong passion for learning.",
+    cta: { label: "Explore School Life", to: "/school-life" },
+    ctaSecondary: { label: "Gallery", to: "/school-life/gallery" },
   },
-]
+];
 
 const AUTO_PLAY_MS = 6000  // 6 s per slide
 
@@ -71,7 +71,7 @@ const KF = `
   .arrow-bounce  { animation: bounceX 1.2s ease infinite; }
 `
 
-// ─── SVG icons ────────────────────────────────────────────────────────────────
+// SVG icons 
 const IcoArrow = () => (
   <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none"
     stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -106,7 +106,7 @@ const IcoPause = () => (
   </svg>
 )
 
-// ─── Hero ─────────────────────────────────────────────────────────────────────
+// ─── Hero 
 const Hero = () => {
   const [cur,      setCur]      = useState(0)
   const [prev,     setPrev]     = useState(null)   // previous index for exit anim
@@ -156,11 +156,11 @@ const Hero = () => {
 
       <section
         className="relative w-full overflow-hidden bg-[#0a0850]"
-        style={{ height: 'calc(100vh - 0px)', minHeight: 600, maxHeight: 900 }}
+        style={{ height: 'calc(60vh - 0px)', minHeight: 600, maxHeight: 900 }}
         aria-label="Hero slideshow"
       >
 
-        {/* ══ BACKGROUND IMAGE ══════════════════════════════════════════════ */}
+        {/*BACKGROUND IMAGE */}
         <div key={`bg-${key}`} className="absolute inset-0 anim-bg">
           <img
             src={slide.bg}
@@ -196,7 +196,9 @@ const Hero = () => {
         </div>
 
         {/* ══ MAIN CONTENT ══════════════════════════════════════════════════ */}
-        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-20 max-w-[900px]">
+        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-20 max-w-[90%]"
+   
+        >
 
           {/* Eyebrow */}
           <p key={`ey-${key}`}
@@ -207,7 +209,7 @@ const Hero = () => {
 
           {/* Heading line 1 */}
           <h1 key={`h1-${key}`}
-            className="anim-line1 font-['Playfair_Display'] font-black text-white leading-[1.05] mb-0"
+            className="anim-line1 font-['Playfair_Display'] font-black text-white leading-[0.9] mb-0"
             style={{ fontSize: 'clamp(48px, 7vw, 96px)' }}>
             {slide.line1}
           </h1>
@@ -215,22 +217,7 @@ const Hero = () => {
           {/* Heading line 2 — with inline logo watermark */}
           <div key={`h2-${key}`}
             className="anim-line2 flex items-center gap-4 sm:gap-6 mb-6">
-            {/* Logo mark — big watermark inline */}
-            <div className="flex-shrink-0 opacity-80"
-              style={{ width: 'clamp(52px, 7vw, 90px)', height: 'clamp(52px, 7vw, 90px)' }}>
-              {whitelogo
-                ? <img src={whitelogo} alt="" className="w-full h-full object-contain drop-shadow-2xl" aria-hidden="true"/>
-                : (
-                  <svg viewBox="0 0 52 56" fill="none" className="w-full h-full">
-                    <path d="M26 2L4 11v20c0 14 11 23 22 25 11-2 22-11 22-25V11L26 2z"
-                      fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.6)" strokeWidth="1.5"/>
-                    <path d="M17 25l9-4 9 4-9 4-9-4z" fill="#fff" opacity=".9"/>
-                    <path d="M20 27.5v5c2 2 6 2 8 0v-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" fill="none"/>
-                  </svg>
-                )
-              }
-            </div>
-            <h1 className="font-['Playfair_Display'] font-black text-white leading-[1.05]"
+            <h1 className="font-['Playfair_Display'] font-black text-white leading-[0.9]"
               style={{ fontSize: 'clamp(48px, 7vw, 96px)' }}>
               {slide.line2}
             </h1>
