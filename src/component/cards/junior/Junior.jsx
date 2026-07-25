@@ -1,7 +1,6 @@
 // component/cards/junior/Junior.jsx
 import React from 'react'
 import SchoolCard from '../SchoolCard'
-
 const JuniorIcon = () => (
   <svg viewBox="0 0 80 70" fill="none" className="w-full h-full">
     <rect x="8"  y="38" width="46" height="8"  rx="2" fill="#1a1a2e" opacity=".85"/>
