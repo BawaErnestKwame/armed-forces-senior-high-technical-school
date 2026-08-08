@@ -3,7 +3,7 @@ import React from "react";
 
 // ── Sections (add each import as you build them) ──────────────────────────────
 import Hero from "./Hero";
-import SchoolTypes from "./SchoolTypes";
+// import SchoolTypes from "./SchoolTypes";
 import About from "./About";
 import Departments from "./Departments";
 import SchoolLifebanner from "./SchoolLifebanner";
@@ -13,12 +13,14 @@ import Programs from "./Programs";
 // import Testimonials from './Testimonials'
 // import Blog        from './Blog'
 // import Admissions  from './Admissions'
+import States from './States';
 
 const Home = () => {
   return (
     <main>
       <Hero />
-      <SchoolTypes />
+      {/* <SchoolTypes /> */}
+      <States/>
       <About />
       <Departments />
       <SchoolLifebanner />

@@ -8,7 +8,7 @@ import Home from "./component/Home"
 import Contact from "./Pages/Contact/component/Contact"
 
 const App = () => (
-  <>
+  <div>
   
     <Navbar/>
     <Routes>
@@ -18,7 +18,7 @@ const App = () => (
     </Routes>
     <Footer/>
     <ScrollToTop/>   {/* fixed position — always on top of everything */}
-  </>
+  </div>
   
 )
 
