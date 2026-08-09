@@ -37,7 +37,7 @@ const TABS = [
   },
 ]
 
-// ─── Features ─────────────────────────────────────────────────────────────────
+// Features
 const FEATURES = [
   'World-Class Education System',
   'Expert & Dedicated Faculty',
@@ -230,7 +230,7 @@ const About = () => {
             <div className="flex items-center gap-2 mb-4">
               <IcoGroup/>
               <span
-                className="text-[12px] font-bold tracking-[2px] uppercase"
+                className="text-[12px] font-bold tracking-[1.2px] uppercase"
                 style={{ color: C.accentRed }}
               >
                 About Our School
@@ -239,10 +239,10 @@ const About = () => {
 
             {/* Heading */}
             <h2
-              className="font-['Playfair_Display'] text-[38px] sm:text-[44px] font-black leading-[1.1] mb-8"
+              className=" text-3xl sm:text-[44px] font-black leading-[1]  mb-8"
               style={{ color: C.royalBlueDark }}
             >
-              An International Standard<br/>of Excellence School
+              An International Standard of Excellence School
             </h2>
 
             {/* ── Tabs ── */}
