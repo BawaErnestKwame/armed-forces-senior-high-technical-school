@@ -227,7 +227,7 @@ const Footer = () => (
   <footer style={{ background: '#080619' }}>
 
     {/* ── Main footer grid ── */}
-    <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+    <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-24 pt-16 pb-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-14">
 
         {/* ── Col 1 — Brand + gallery + contact ── */}
@@ -362,19 +362,7 @@ const Footer = () => (
             ))}
           </div>
 
-          {/* School motto */}
-          <div
-            className="mt-6 px-4 py-3 rounded-xl"
-            style={{ background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.07)' }}
-          >
-            <p className="text-[10px] font-semibold tracking-[1.5px] uppercase mb-1"
-              style={{ color: 'rgba(255,255,255,.3)' }}>
-              School Motto
-            </p>
-            <p className="font-['Playfair_Display'] uppercase text-[14px] font-bold text-white">
-            Service With Humanity
-            </p>
-          </div>
+    
         </div>
 
       </div>
@@ -386,7 +374,7 @@ const Footer = () => (
       style={{ borderColor: 'rgba(255,255,255,.07)' }}
     >
       <div
-        className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8 py-5
+        className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-24 py-5
           flex flex-wrap items-center justify-between gap-4"
       >
         <p className="text-[13px]" style={{ color: 'rgba(255,255,255,.35)' }}>

@@ -8,12 +8,8 @@ const NAV_LINKS = [
     label: "About Us",
     to: "/about",
     children: [
-      { label: "About AMESCO", to: "/about" },
-      { label: "History", to: "/about/history" },
-      { label: "Administration", to: "/about/administration" },
-      { label: "Campus Map", to: "/about/campus-map" },
-      { label: "Mission & Vision", to: "/about/mission-vision" },
-      { label: "Headmaster", to: "/about/headmaster" },
+      { label: "About Us", to: "/about" },
+      { label: "Leaders", to: "/about/leaders" },
     ],
   },
   {
@@ -34,9 +30,7 @@ const NAV_LINKS = [
     label: "Admissions",
     to: "/admissions",
     children: [
-      { label: "How to Apply", to: "/admissions/how-to-apply" },
-      { label: "Admission Requirements", to: "/admissions/requirements" },
-      { label: "Fees & Finances", to: "/admissions/fees" },
+      { label: "How to Apply", to: "/admissions/howtoApply" },
       { label: "Apply Now", to: "/admissions/apply" },
     ],
   },
@@ -786,12 +780,6 @@ const Navbar = () => {
     setMobNavOpen(false);
   };
 
-  // ── Responsive logo & padding values ─────────────────────────────────────
-  // Mobile  (<640px):  logo 70px,  padding-left 100px
-  // Tablet  (<1024px): logo 90px,  padding-left 160px
-  // Desktop (≥1024px): logo 110px, padding-left 200px
-  // These keep the logo visible without crowding the nav content
-
   return (
     <>
       <style>{KF}</style>
@@ -888,8 +876,8 @@ const Navbar = () => {
                 <IcoHamburger open={mobNavOpen} />
               </button>
 
-              {/* Search — md+ only */}
-              <div ref={searchRef} className="relative hidden md:block">
+              {/* Search — visible from small screens up (dropdown needs room) */}
+              <div ref={searchRef} className="relative hidden sm:block">
                 <button
                   onClick={() => setSearchOpen((v) => !v)}
                   aria-label="Search"
@@ -906,7 +894,7 @@ const Navbar = () => {
 
                 {/* Search dropdown */}
                 <div
-                  className={`absolute top-[calc(100%+10px)] right-0 w-80 bg-white border border-[#e9ecef] rounded-2xl shadow-[0_12px_40px_rgba(14,7,221,.13)] p-3 z-50 transition-all duration-[220ms]
+                  className={`absolute top-[calc(100%+10px)] right-0 w-80 max-w-[90vw] bg-white border border-[#e9ecef] rounded-2xl shadow-[0_12px_40px_rgba(14,7,221,.13)] p-3 z-50 transition-all duration-[220ms]
                   ${searchOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none invisible"}`}
                 >
                   <div className="absolute -top-[6px] right-4 w-3 h-3 rotate-45 bg-white border-l border-t border-[#e9ecef]" />
@@ -939,12 +927,12 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Info panel toggle — md+ only */}
+              {/* Info panel toggle — visible from small screens up */}
               <button
                 onClick={() => setInfoOpen((v) => !v)}
                 aria-label="Open info panel"
                 aria-expanded={infoOpen}
-                className={`hidden md:flex w-9 h-9 rounded-lg border items-center justify-center cursor-pointer transition-all duration-200
+                className={`hidden sm:flex w-9 h-9 rounded-lg border items-center justify-center cursor-pointer transition-all duration-200
                   ${
                     infoOpen
                       ? "bg-[#0e07dd] border-[#0e07dd] text-white"
@@ -1044,6 +1032,27 @@ const Navbar = () => {
               transition-colors duration-200 hover:bg-[#E63946]"
           >
             ✕
+          </button>
+        </div>
+
+        <div className="px-6 pt-4 pb-2 flex-shrink-0 sm:hidden">
+          <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2.5 border border-white/15">
+            <IcoSearch />
+            <input
+              type="text"
+              placeholder="Search programmes, news…"
+              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50"
+              aria-label="Search"
+            />
+          </div>
+          <button
+            onClick={() => {
+              setMobNavOpen(false);
+              setInfoOpen(true);
+            }}
+            className="flex items-center justify-center gap-2 w-full mt-2.5 bg-white/10 border border-white/15 text-white/85 py-2.5 rounded-xl text-sm font-semibold transition-colors duration-200 hover:bg-white/15"
+          >
+            <IcoMenu /> School Info
           </button>
         </div>
 

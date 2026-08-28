@@ -1,6 +1,7 @@
 // component/About.jsx
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import aboutimage from "../assets/aboutimage.jpeg"
 
 // ─── Color tokens (matching your CSS variables) ───────────────────────────────
 const C = {
@@ -145,7 +146,7 @@ const BookDeco = () => (
   </svg>
 )
 
-// ─── About ────────────────────────────────────────────────────────────────────
+// ─── About 
 const About = () => {
   const [activeTab, setActiveTab] = useState('mission')
   const active = TABS.find(t => t.id === activeTab)
@@ -158,79 +159,18 @@ const About = () => {
 
       <BookDeco/>
 
-      <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-[1220px] mx-auto px-4 md:px-16 lg:px-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2  items-center">
+          <img src={aboutimage} alt="" className="w-[70%] shadow hidden md:flex h-auto rounded-3xl"/>
 
-          {/* ══ LEFT — Image collage ═══════════════════════════════════════ */}
-          <div className="relative flex justify-center">
-
-            {/* Main image */}
-            <div
-              className="relative z-10 w-[68%] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,.15)]"
-              style={{ borderRadius: '28px', borderBottomRightRadius: '80px' }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=700&q=80"
-                alt="Students with globe"
-                className="w-full h-full object-cover aspect-[4/5]"
-              />
-            </div>
-
-            {/* Second image — overlapping bottom-right */}
-            <div
-              className="absolute bottom-0 right-0 w-[52%] overflow-hidden z-20"
-              style={{
-                borderRadius: '20px',
-                borderTopLeftRadius: '60px',
-                border: `4px solid ${C.bg}`,
-                boxShadow: '0 16px 40px rgba(0,0,0,.18)',
-              }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80"
-                alt="Students in classroom"
-                className="w-full h-full object-cover aspect-[4/3]"
-              />
-            </div>
-
-            {/* Admission stat card */}
-            <div
-              className="absolute bottom-6 left-4 z-30 rounded-2xl px-5 py-4
-                flex items-center gap-4"
-              style={{
-                background:  C.accentRed,
-                boxShadow:   `0 10px 32px rgba(230,57,70,.4)`,
-                minWidth:    200,
-              }}
-            >
-              <IcoCap/>
-              <div className="flex flex-col gap-1">
-                <div className="flex -space-x-2">
-                  {[11, 15, 22, 33].map(n => (
-                    <img
-                      key={n}
-                      src={`https://i.pravatar.cc/40?img=${n}`}
-                      alt=""
-                      className="w-8 h-8 rounded-full object-cover"
-                      style={{ border: `2px solid ${C.accentRed}` }}
-                    />
-                  ))}
-                </div>
-                <span className="text-white text-[13px] font-bold tracking-wide">
-                  4558 + Admission
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* ══ RIGHT — Content ════════════════════════════════════════════ */}
+          {/* ══ RIGHT — Content  */}
           <div>
 
             {/* Section tag */}
             <div className="flex items-center gap-2 mb-4">
               <IcoGroup/>
               <span
-                className="text-[12px] font-bold tracking-[1.2px] uppercase"
+                className="text-[12px] font-tracking-[1.2px] font-extrabold uppercase"
                 style={{ color: C.accentRed }}
               >
                 About Our School
@@ -239,7 +179,7 @@ const About = () => {
 
             {/* Heading */}
             <h2
-              className=" text-3xl sm:text-[44px] font-black leading-[1]  mb-8"
+              className=" text-3xl   font-black leading-[1]  mb-8"
               style={{ color: C.royalBlueDark }}
             >
               An International Standard of Excellence School
@@ -307,7 +247,7 @@ const About = () => {
               <Link
                 to="/about"
                 className="inline-flex items-center gap-2.5 text-white font-bold text-[14px]
-                  px-7 py-4 rounded-full no-underline transition-all duration-300
+                  px-4 py-3 rounded-full no-underline transition-all duration-300
                   hover:-translate-y-0.5"
                 style={{
                   background:  C.accentRed,

@@ -207,7 +207,7 @@ const Hero = () => {
         ════════════════════════════════════════════════════════════════ */}
         <div
           className="absolute inset-0 z-10 flex flex-col justify-center
-          px-6 sm:px-12 md:px-16 lg:px-20"
+          px-6 sm:px-12 md:px-16 lg:px-24"
         >
           {/* Inner wrapper — caps width so text doesn't run too wide on large screens */}
           <div className="w-full max-w-[90%] lg:max-w-[60%] flex flex-col gap-0">

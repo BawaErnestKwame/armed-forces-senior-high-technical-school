@@ -23,8 +23,8 @@ const Home = () => {
       <States/>
       <About />
       <Departments />
-      <SchoolLifebanner />
-      <SchoolLife />
+      {/* <SchoolLifebanner /> */}
+      {/* <SchoolLife /> */}
       <Teachers />
       <Programs />
       {/* <Testimonials /> */}
