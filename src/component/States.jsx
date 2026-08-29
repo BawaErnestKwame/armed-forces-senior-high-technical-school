@@ -8,7 +8,7 @@ const States = () => {
   const [counts, setCounts] = useState([0, 0, 0, 0]);
   const sectionRef = useRef(null);
   const targets = [2000, 20, 15, 200];
-  const labels = ["Students", "Staff", "Courses", "Class Rooms"];
+  const labels = ["Students", "Staff", "Courses", "Facilities"];
   const icons = [
     <PersonAddAltIcon sx={{ fontSize: 26, color: "#E63946" }} />,
     <GroupAddIcon sx={{ fontSize: 26, color: "#E63946" }} />,

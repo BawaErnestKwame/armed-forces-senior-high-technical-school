@@ -30,8 +30,8 @@ const NAV_LINKS = [
     label: "Admissions",
     to: "/admissions",
     children: [
-      { label: "How to Apply", to: "/admissions/howtoApply" },
-      { label: "Apply Now", to: "/admissions/apply" },
+      { label: "How to Apply", to: "/admissions/howtoApply/howToApply" },
+      { label: "Apply Now", to: "/admissions/applyNow/applyNow" },
     ],
   },
   {
@@ -56,7 +56,7 @@ const QUICK_LINKS = [
 
 const GALLERY = [
   "https://images.unsplash.com/photo-1562774053-701939374585?w=400&q=80",
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=80",
+  "https://images.unsplash.com/photo-1523054050858-8df90110c9f1?w=400&q=80",
   "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&q=80",
   "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80",
   "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=80",
@@ -87,7 +87,7 @@ const KF = `
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 const IcoSearch = () => (
   <svg
-    className="w-[18px] h-[18px]"
+    className="w-[16px] h-[16px]"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -101,7 +101,7 @@ const IcoSearch = () => (
 );
 const IcoMenu = () => (
   <svg
-    className="w-[18px] h-[18px]"
+    className="w-[16px] h-[16px]"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -115,7 +115,7 @@ const IcoMenu = () => (
 );
 const IcoChevron = ({ open }) => (
   <svg
-    className={`w-[11px] h-[11px] flex-shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+    className={`w-[10px] h-[10px] flex-shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
     viewBox="0 0 12 12"
     fill="none"
   >
@@ -130,7 +130,7 @@ const IcoChevron = ({ open }) => (
 );
 const IcoArrow = ({ cls = "" }) => (
   <svg
-    className={`w-[14px] h-[14px] ${cls}`}
+    className={`w-[12px] h-[12px] ${cls}`}
     viewBox="0 0 16 16"
     fill="none"
     stroke="currentColor"
@@ -170,7 +170,7 @@ const IcoChevRight = () => (
 );
 const IcoGradCap = () => (
   <svg
-    className="w-[18px] h-[18px]"
+    className="w-[16px] h-[16px]"
     viewBox="0 0 24 24"
     fill="none"
     stroke="rgba(255,255,255,.8)"
@@ -184,7 +184,7 @@ const IcoGradCap = () => (
 );
 const IcoPhone = () => (
   <svg
-    className="w-4 h-4"
+    className="w-3.5 h-3.5"
     viewBox="0 0 24 24"
     fill="none"
     stroke="rgba(255,255,255,.85)"
@@ -197,7 +197,7 @@ const IcoPhone = () => (
 );
 const IcoMail = () => (
   <svg
-    className="w-4 h-4"
+    className="w-3.5 h-3.5"
     viewBox="0 0 24 24"
     fill="none"
     stroke="rgba(255,255,255,.85)"
@@ -211,7 +211,7 @@ const IcoMail = () => (
 );
 const IcoPin = () => (
   <svg
-    className="w-4 h-4"
+    className="w-3.5 h-3.5"
     viewBox="0 0 24 24"
     fill="none"
     stroke="rgba(255,255,255,.85)"
@@ -224,7 +224,7 @@ const IcoPin = () => (
   </svg>
 );
 const IcoHamburger = ({ open }) => (
-  <div className="w-[22px] h-[18px] flex flex-col justify-between">
+  <div className="w-[20px] h-[16px] flex flex-col justify-between">
     {[0, 1, 2].map((i) => (
       <span
         key={i}
@@ -247,7 +247,7 @@ const IcoHamburger = ({ open }) => (
   </div>
 );
 const ShieldMark = () => (
-  <svg width="52" height="52" viewBox="0 0 52 56" fill="none">
+  <svg width="44" height="44" viewBox="0 0 52 56" fill="none">
     <path
       d="M26 2L4 11v20c0 14 11 23 22 25 11-2 22-11 22-25V11L26 2z"
       fill="rgba(255,255,255,.18)"
@@ -392,7 +392,7 @@ const Lightbox = ({ images, index, onClose, onNav }) => {
 // ─── Desktop dropdown ─────────────────────────────────────────────────────────
 const Dropdown = ({ items, visible, onMouseEnter, onMouseLeave }) => (
   <div
-    className={`absolute top-[calc(100%+2px)] left-1/2 -translate-x-1/2 bg-white border border-[#e9ecef] rounded-2xl shadow-[0_16px_48px_rgba(14,7,221,.14)] min-w-[215px] p-2 z-[20] transition-all duration-[200ms]
+    className={`absolute top-[calc(100%+2px)] left-1/2 -translate-x-1/2 bg-white border border-[#e9ecef] rounded-xl shadow-[0_16px_48px_rgba(14,7,221,.14)] min-w-[190px] p-1.5 z-[20] transition-all duration-[200ms]
       ${visible ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible translate-y-2.5 pointer-events-none"}`}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
@@ -404,15 +404,16 @@ const Dropdown = ({ items, visible, onMouseEnter, onMouseLeave }) => (
         key={item.to}
         to={item.to}
         end={item.to === "/"}
-        className={({ isActive }) =>
-          `flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 group no-underline
-           ${isActive ? "text-[#0e07dd] bg-[#0e07dd]/[0.06] pl-5" : "text-[#343a40] hover:text-[#0e07dd] hover:bg-[#0e07dd]/[0.06] hover:pl-5"}`
+        className={
+          ({ isActive }) =>
+            `flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-lg transition-all duration-150 group no-underline
+           ${isActive ? "text-[#0e07dd] bg-[#0e07dd]/[0.06] pl-4" : "text-[#343a40] hover:text-[#0e07dd] hover:bg-[#0e07dd]/[0.06] hover:pl-4"}` // Reduced font from text-sm to text-xs
         }
       >
         {({ isActive }) => (
           <>
             <span
-              className={`w-[5px] h-[5px] rounded-full flex-shrink-0 transition-colors duration-150
+              className={`w-[4px] h-[4px] rounded-full flex-shrink-0 transition-colors duration-150
               ${isActive ? "bg-[#E63946]" : "bg-[#dee2e6] group-hover:bg-[#E63946]"}`}
             />
             {item.label}
@@ -452,9 +453,10 @@ const DesktopNavItem = ({ link }) => {
       <NavLink
         to={link.to}
         end={link.to === "/"}
-        className={({ isActive }) =>
-          `inline-flex items-center gap-1.5 px-[15px] py-2.5 text-sm font-semibold rounded-lg no-underline transition-all duration-200 whitespace-nowrap
-           ${isActive ? "text-[#E63946] font-bold" : "text-[#343a40] hover:text-[#0e07dd] hover:bg-[#0e07dd]/[0.06]"}`
+        className={
+          ({ isActive }) =>
+            `inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-lg no-underline transition-all duration-200 whitespace-nowrap
+           ${isActive ? "text-[#E63946] font-bold" : "text-[#343a40] hover:text-[#0e07dd] hover:bg-[#0e07dd]/[0.06]"}` // Reduced from text-sm to text-xs, padding reduced
         }
       >
         {link.label}
@@ -470,10 +472,11 @@ const DesktopNavItem = ({ link }) => {
     >
       <NavLink
         to={link.to}
-        className={({ isActive }) =>
-          `inline-flex items-center gap-1.5 px-[15px] py-2.5 text-sm font-semibold rounded-lg no-underline transition-all duration-200 whitespace-nowrap
+        className={
+          ({ isActive }) =>
+            `inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-lg no-underline transition-all duration-200 whitespace-nowrap
            ${open ? "text-[#0e07dd] bg-[#0e07dd]/[0.06]" : ""}
-           ${isActive ? "text-[#E63946]" : "text-[#343a40] hover:text-[#0e07dd] hover:bg-[#0e07dd]/[0.06]"}`
+           ${isActive ? "text-[#E63946]" : "text-[#343a40] hover:text-[#0e07dd] hover:bg-[#0e07dd]/[0.06]"}` // Reduced from text-sm to text-xs, padding reduced
         }
         onClick={(e) => {
           e.preventDefault();
@@ -493,7 +496,7 @@ const DesktopNavItem = ({ link }) => {
   );
 };
 
-// ─── Mobile nav item ──────────────────────────────────────────────────────────
+// ─── Mobile nav item 
 const MobileNavItem = ({ link, onClose }) => {
   const hasKids = Boolean(link.children?.length);
   const [open, setOpen] = useState(false);
@@ -505,9 +508,10 @@ const MobileNavItem = ({ link, onClose }) => {
           to={link.to}
           end={link.to === "/"}
           onClick={onClose}
-          className={({ isActive }) =>
-            `block w-full px-6 py-[15px] text-sm font-semibold no-underline transition-colors duration-200
-           ${isActive ? "text-[#E63946]" : "text-white/85 hover:text-white"}`
+          className={
+            ({ isActive }) =>
+              `block w-full px-6 py-3 text-sm font-semibold no-underline transition-colors duration-200
+           ${isActive ? "text-[#E63946]" : "text-white/85 hover:text-white"}` // Reduced from py-[15px] to py-3
           }
         >
           {link.label}
@@ -519,7 +523,7 @@ const MobileNavItem = ({ link, onClose }) => {
     <div className="border-b border-white/[0.08]">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center justify-between w-full px-6 py-[15px] bg-transparent border-none cursor-pointer"
+        className="flex items-center justify-between w-full px-6 py-3 bg-transparent border-none cursor-pointer" // Reduced from py-[15px] to py-3
       >
         <span className="text-sm font-semibold text-white/85">
           {link.label}
@@ -535,9 +539,10 @@ const MobileNavItem = ({ link, onClose }) => {
               key={child.to}
               to={child.to}
               onClick={onClose}
-              className={({ isActive }) =>
-                `flex items-center gap-2.5 px-8 py-2.5 text-[13px] font-medium no-underline transition-all duration-200
-                 ${isActive ? "text-white pl-10" : "text-white/60 hover:text-white hover:pl-10"}`
+              className={
+                ({ isActive }) =>
+                  `flex items-center gap-2.5 px-8 py-2 text-xs font-medium no-underline transition-all duration-200
+                 ${isActive ? "text-white pl-10" : "text-white/60 hover:text-white hover:pl-10"}` // Reduced from text-[13px] to text-xs
               }
             >
               {({ isActive }) => (
@@ -554,11 +559,11 @@ const MobileNavItem = ({ link, onClose }) => {
   );
 };
 
-// ─── Info Panel ───────────────────────────────────────────────────────────────
+// ─── Info Panel 
 const InfoPanel = ({ open, onClose, onImgClick }) => (
   <div
     id="amesco-info-panel"
-    className={`fixed top-0 right-0 bottom-0 w-[420px] max-w-[92vw] bg-[#c1121f] z-[1000]
+    className={`fixed top-0 right-0 bottom-0 w-[380px] max-w-[92vw] bg-[#c1121f] z-[1000]
       overflow-y-auto flex flex-col transition-transform duration-[400ms] ease-[cubic-bezier(0.32,0,0,1)]
       ${open ? "translate-x-0" : "translate-x-full"}`}
     aria-hidden={!open}
@@ -573,10 +578,16 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
       ✕
     </button>
 
-    <div className="flex flex-col gap-7 p-8">
+    <div className="flex flex-col gap-5 p-6">
+      {" "}
+      {/* Reduced gap from gap-7 to gap-5, padding from p-8 to p-6 */}
       {/* Logo row */}
-      <div className="flex items-center gap-4">
-        <div className="flex-shrink-0 w-14 h-14">
+      <div className="flex items-center gap-3">
+        {" "}
+        {/* Reduced gap from gap-4 to gap-3 */}
+        <div className="flex-shrink-0 w-12 h-12">
+          {" "}
+          {/* Reduced from w-14 h-14 */}
           {logo ? (
             <img
               src={logo}
@@ -588,25 +599,31 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
           )}
         </div>
         <div>
-          <p className="text-[10px] font-bold text-white/60 tracking-[2px] uppercase mb-1">
+          <p className="text-[9px] font-bold text-white/60 tracking-[2px] uppercase mb-0.5">
+            {" "}
+            {/* Reduced from text-[10px] */}
             SCHOOL OF
           </p>
-          <p className="font-['Playfair_Display'] text-[26px] font-black text-white tracking-wide uppercase leading-none">
+          <p className="font-['Playfair_Display'] text-xl font-black text-white tracking-wide uppercase leading-none">
+            {" "}
+            {/* Reduced from text-[26px] to text-xl */}
             AMESCO
           </p>
         </div>
       </div>
-
-      <p className="text-[15px] text-white/85 leading-[1.85] border-t border-white/15 pt-6 m-0">
+      <p className="text-sm text-white/85 leading-[1.7] border-t border-white/15 pt-4 m-0">
+        {" "}
+        {/* Reduced from text-[15px] to text-sm, pt from pt-6 to pt-4 */}
         Armed Forces Senior High Technical School, Kumasi (AMESCO) was
         established on 28th January 1991 and has grown into one of the finest
         co-educational institutions in the Ashanti Region — committed to
         academic excellence, discipline, and producing well-rounded, confident
         youth.
       </p>
-
       {/* Gallery */}
-      <div className="grid grid-cols-3 gap-2.5">
+      <div className="grid grid-cols-3 gap-2">
+        {" "}
+        {/* Reduced from gap-2.5 to gap-2 */}
         {GALLERY.map((src, i) => (
           <div
             key={i}
@@ -624,7 +641,7 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
             />
             <div className="absolute inset-0 bg-[#c1121f]/0 group-hover:bg-[#c1121f]/30 transition-colors duration-300 flex items-center justify-center">
               <svg
-                className="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+                className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" // Reduced from w-7 h-7
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -641,13 +658,16 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
           </div>
         ))}
       </div>
-
       {/* Quick Contact */}
       <div>
-        <h4 className="font-['Playfair_Display'] text-lg font-extrabold text-white mb-4">
+        <h4 className="font-['Playfair_Display'] text-base font-extrabold text-white mb-3">
+          {" "}
+          {/* Reduced from text-lg to text-base, mb-4 to mb-3 */}
           Quick Contact:
         </h4>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-0.5">
+          {" "}
+          {/* Reduced from gap-1 to gap-0.5 */}
           {[
             {
               href: "tel:+233248732262",
@@ -672,10 +692,14 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
           ].map(({ href, icon, text }) => {
             const inner = (
               <>
-                <span className="w-9 h-9 rounded-full bg-white/15 flex-shrink-0 flex items-center justify-center transition-colors duration-200 group-hover:bg-white/25">
+                <span className="w-8 h-8 rounded-full bg-white/15 flex-shrink-0 flex items-center justify-center transition-colors duration-200 group-hover:bg-white/25">
+                  {" "}
+                  {/* Reduced from w-9 h-9 */}
                   {icon}
                 </span>
-                <span className="text-sm font-medium text-white/85 group-hover:text-white transition-colors duration-200">
+                <span className="text-xs font-medium text-white/85 group-hover:text-white transition-colors duration-200">
+                  {" "}
+                  {/* Reduced from text-sm to text-xs */}
                   {text}
                 </span>
               </>
@@ -684,43 +708,47 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
               <a
                 key={text}
                 href={href}
-                className="flex items-center gap-3.5 py-1.5 no-underline group"
+                className="flex items-center gap-3 py-1 no-underline group" // Reduced from gap-3.5, py-1.5
               >
                 {inner}
               </a>
             ) : (
-              <div key={text} className="flex items-start gap-3.5 py-1.5 group">
+              <div key={text} className="flex items-start gap-3 py-1 group">
                 {inner}
               </div>
             );
           })}
         </div>
       </div>
-
       {/* Follow Us */}
-      <div className="border-t border-white/15 pt-6">
-        <h4 className="font-['Playfair_Display'] text-lg font-extrabold text-white mb-4">
+      <div className="border-t border-white/15 pt-4">
+        {" "}
+        {/* Reduced from pt-6 to pt-4 */}
+        <h4 className="font-['Playfair_Display'] text-base font-extrabold text-white mb-3">
+          {" "}
+          {/* Reduced from text-lg to text-base, mb-4 to mb-3 */}
           Follow Us:
         </h4>
-        <div className="flex gap-2.5 flex-wrap">
+        <div className="flex gap-2 flex-wrap">
+          {" "}
+          {/* Reduced from gap-2.5 to gap-2 */}
           {SOCIALS.map((s) => (
             <a
               key={s.label}
               href={s.href}
               aria-label={s.label}
-              className="w-9 h-9 rounded-lg bg-white/15 border border-white/20 flex items-center justify-center text-white text-[13px] font-bold no-underline transition-all duration-200 hover:bg-white hover:text-[#c1121f] hover:border-white"
+              className="w-8 h-8 rounded-lg bg-white/15 border border-white/20 flex items-center justify-center text-white text-xs font-bold no-underline transition-all duration-200 hover:bg-white hover:text-[#c1121f] hover:border-white" // Reduced from w-9 h-9, text-[13px] to text-xs
             >
               {s.letter}
             </a>
           ))}
         </div>
       </div>
-
       {/* Apply CTA */}
       <Link
         to="/admissions/apply"
         onClick={onClose}
-        className="flex items-center justify-center gap-2.5 w-full bg-white text-[#c1121f] py-4 rounded-full text-[15px] font-extrabold no-underline shadow-[0_6px_24px_rgba(0,0,0,.2)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(0,0,0,.25)] mt-1"
+        className="flex items-center justify-center gap-2 w-full bg-white text-[#c1121f] py-3.5 rounded-full text-sm font-extrabold no-underline shadow-[0_6px_24px_rgba(0,0,0,.2)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(0,0,0,.25)] mt-1" // Reduced from py-4, text-[15px] to text-sm
       >
         Apply Now <IcoArrow cls="stroke-[#c1121f]" />
       </Link>
@@ -786,42 +814,41 @@ const Navbar = () => {
 
       <div className="sticky top-0 z-[997] overflow-visible">
         <div className="relative">
-          {/* ════ LOGO ════
-              Responsive: smaller on mobile, full size on desktop
-              left-4 on mobile → left-8 on md → left-10 on lg
-          ════ */}
+          {/* ════ LOGO ════ */}
           <Link
             to="/"
-            className="absolute left-4 md:left-6 lg:left-8 top-0 z-[15] flex items-center no-underline"
+            className="absolute left-3 md:left-5 lg:left-24 top-0 z-[15] flex items-center no-underline" // Reduced from left-4/6/8
             style={{
-              height: "calc(44px + 50px)",
-            }} /* topbar(44) + main nav(50) */
+              height: "calc(40px + 44px)", // Reduced from 44px + 50px
+            }}
           >
             {logo ? (
               <img
                 src={logo}
                 alt="AMESCO"
                 className="w-auto object-contain drop-shadow-lg
-                    h-[60px] sm:h-[72px] lg:h-[82px]"
+                    h-[50px] sm:h-[60px] lg:h-[68px]" // Reduced from 60/72/82
               />
             ) : (
               <ShieldMark />
             )}
           </Link>
 
-          {/* ════ TOP BAR ════
-              pl responsive: matches logo width at each breakpoint
-          ════ */}
+          {/* ════ TOP BAR ════ */}
           <div
-            className="bg-[#261481] flex items-center justify-between flex-wrap gap-y-1
-              min-h-[44px]
-              pl-[120px] sm:pl-[190px] lg:pl-[220px]
-              pr-4 md:pr-6 py-1 md:py-0"
+            className="bg-[#261481] flex items-center justify-between flex-wrap gap-y-0.5
+              min-h-[40px] // Reduced from min-h-[44px]
+              pl-[100px] sm:pl-[160px] lg:pl-[190px] // Reduced to match smaller logo
+              pr-3 md:pr-4 py-0.5 md:py-0.5 lg:pr-24" // Reduced padding
           >
             {/* Welcome text — md+ only */}
-            <div className="hidden md:flex items-center gap-2.5">
+            <div className="hidden md:flex items-center gap-2">
+              {" "}
+              {/* Reduced from gap-2.5 to gap-2 */}
               <IcoGradCap />
-              <span className="text-[13px] font-semibold text-white/85 whitespace-nowrap">
+              <span className="text-[11px] font-semibold text-white/85 whitespace-nowrap">
+                {" "}
+                {/* Reduced from text-[13px] to text-[11px] */}
                 Welcome to Armed Forces Senior High Technical School, Kumasi
               </span>
             </div>
@@ -833,7 +860,7 @@ const Navbar = () => {
                   key={link.to}
                   to={link.to}
                   className={({ isActive }) =>
-                    `text-[12.5px] font-medium px-3 md:px-3.5 py-0.5 border-r border-white/[0.18] last:border-r-0 no-underline whitespace-nowrap transition-colors duration-200
+                    `text-[11px] font-medium px-2 md:px-2.5 py-0.5 border-r border-white/[0.18] last:border-r-0 no-underline whitespace-nowrap transition-colors duration-200 // Reduced from text-[12.5px] to text-[11px], px-3 to px-2
                      ${isActive ? "text-white font-semibold" : "text-white/70 hover:text-white"}`
                   }
                 >
@@ -846,16 +873,16 @@ const Navbar = () => {
           {/* ════ MAIN NAV — reduced height ════ */}
           <div
             className={`bg-white
-              h-[50px]
-              pl-[120px] sm:pl-[190px] lg:pl-[220px]
-              pr-4 md:pr-6
+              h-[44px] // Reduced from h-[50px]
+              pl-[100px] sm:pl-[160px] lg:pl-[190px] // Reduced to match smaller logo
+              pr-3 md:pr-4 lg:pr-24
               flex items-center justify-between
               relative z-[9] transition-shadow duration-300
               ${scrolled ? "shadow-[0_4px_28px_rgba(14,7,221,.12)]" : "shadow-[0_2px_10px_rgba(14,7,221,.06)]"}`}
           >
             {/* Desktop nav links */}
             <nav
-              className="hidden lg:flex items-center gap-0.5"
+              className="hidden lg:flex items-center gap-0" // Reduced gap from gap-0.5 to gap-0
               aria-label="Main navigation"
             >
               {NAV_LINKS.map((link) => (
@@ -864,10 +891,12 @@ const Navbar = () => {
             </nav>
 
             {/* Right controls */}
-            <div className="flex items-center gap-2 flex-shrink-0 ml-auto">
+            <div className="flex items-center gap-4 flex-shrink-0 ml-auto">
+              {" "}
+              {/* Reduced from gap-2 to gap-1.5 */}
               {/* Mobile hamburger */}
               <button
-                className="lg:hidden w-9 h-9 rounded-lg bg-transparent border border-[#dee2e6]
+                className="lg:hidden w-8 h-8 rounded-lg bg-transparent border border-[#dee2e6] // Reduced from w-9 h-9
                   flex items-center justify-center cursor-pointer transition-all duration-200
                   hover:bg-[#0e07dd]/[0.06] hover:border-[#0e07dd]"
                 onClick={() => setMobNavOpen((v) => !v)}
@@ -875,14 +904,13 @@ const Navbar = () => {
               >
                 <IcoHamburger open={mobNavOpen} />
               </button>
-
-              {/* Search — visible from small screens up (dropdown needs room) */}
+              {/* Search — visible from small screens up */}
               <div ref={searchRef} className="relative hidden sm:block">
                 <button
                   onClick={() => setSearchOpen((v) => !v)}
                   aria-label="Search"
                   aria-expanded={searchOpen}
-                  className={`w-9 h-9 rounded-lg border flex items-center justify-center cursor-pointer transition-all duration-200
+                  className={`w-8 h-8 rounded-lg border flex items-center justify-center cursor-pointer transition-all duration-200 // Reduced from w-9 h-9
                     ${
                       searchOpen
                         ? "bg-[#0e07dd] border-[#0e07dd] text-white"
@@ -894,11 +922,13 @@ const Navbar = () => {
 
                 {/* Search dropdown */}
                 <div
-                  className={`absolute top-[calc(100%+10px)] right-0 w-80 max-w-[90vw] bg-white border border-[#e9ecef] rounded-2xl shadow-[0_12px_40px_rgba(14,7,221,.13)] p-3 z-50 transition-all duration-[220ms]
+                  className={`absolute top-[calc(100%+8px)] right-0 w-72 max-w-[90vw] bg-white border border-[#e9ecef] rounded-xl shadow-[0_12px_40px_rgba(14,7,221,.13)] p-2.5 z-50 transition-all duration-[220ms] // Reduced width, padding, top
                   ${searchOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none invisible"}`}
                 >
                   <div className="absolute -top-[6px] right-4 w-3 h-3 rotate-45 bg-white border-l border-t border-[#e9ecef]" />
-                  <div className="flex items-center gap-2 bg-[#f8f9fa] rounded-xl px-3 py-2.5 border border-[#e9ecef] focus-within:border-[#0e07dd] focus-within:bg-white transition-all duration-200">
+                  <div className="flex items-center gap-2 bg-[#f8f9fa] rounded-lg px-3 py-2 border border-[#e9ecef] focus-within:border-[#0e07dd] focus-within:bg-white transition-all duration-200">
+                    {" "}
+                    {/* Reduced padding */}
                     <IcoSearch />
                     <input
                       ref={searchInputRef}
@@ -909,7 +939,7 @@ const Navbar = () => {
                         e.key === "Escape" && setSearchOpen(false)
                       }
                       placeholder="Search programmes, news…"
-                      className="flex-1 bg-transparent text-sm text-[#343a40] outline-none placeholder:text-[#9ca3af]"
+                      className="flex-1 bg-transparent text-xs text-[#343a40] outline-none placeholder:text-[#9ca3af]" // Reduced from text-sm to text-xs
                       aria-label="Search"
                     />
                     {searchQ && (
@@ -921,18 +951,19 @@ const Navbar = () => {
                       </button>
                     )}
                   </div>
-                  <button className="mt-2 w-full bg-[#0e07dd] text-white text-sm font-bold py-2.5 rounded-xl transition-colors duration-200 hover:bg-[#261481]">
+                  <button className="mt-2 w-full bg-[#0e07dd] text-white text-xs font-bold py-2 rounded-lg transition-colors duration-200 hover:bg-[#261481]">
+                    {" "}
+                    {/* Reduced from text-sm, py-2.5, rounded-xl */}
                     Search
                   </button>
                 </div>
               </div>
-
               {/* Info panel toggle — visible from small screens up */}
               <button
                 onClick={() => setInfoOpen((v) => !v)}
                 aria-label="Open info panel"
                 aria-expanded={infoOpen}
-                className={`hidden sm:flex w-9 h-9 rounded-lg border items-center justify-center cursor-pointer transition-all duration-200
+                className={`hidden sm:flex w-8 h-8 rounded-lg border items-center justify-center cursor-pointer transition-all duration-200 // Reduced from w-9 h-9
                   ${
                     infoOpen
                       ? "bg-[#0e07dd] border-[#0e07dd] text-white"
@@ -941,12 +972,11 @@ const Navbar = () => {
               >
                 <IcoMenu />
               </button>
-
               {/* Apply Now — lg+ only */}
               <Link
                 to="/admissions/apply"
-                className="hidden lg:inline-flex apply-ring items-center gap-2 bg-[#E63946] text-white
-                  px-5 py-2 rounded-full text-sm font-bold no-underline
+                className="hidden lg:inline-flex apply-ring items-center gap-1.5 bg-[#E63946] text-white // Reduced from gap-2
+                  px-4 py-1.5 rounded-full text-xs font-bold no-underline // Reduced from px-5 py-2, text-sm to text-xs
                   transition-all duration-200 hover:bg-[#c1121f] hover:-translate-y-0.5
                   hover:shadow-none flex-shrink-0"
               >
@@ -974,7 +1004,7 @@ const Navbar = () => {
 
       {/* Mobile nav drawer */}
       <nav
-        className={`lg:hidden fixed top-0 right-0 bottom-0 w-[min(320px,88vw)]
+        className={`lg:hidden fixed top-0 right-0 bottom-0 w-[min(280px,88vw)]
           bg-gradient-to-br from-[#0a0850] to-[#261481] z-[1001]
           overflow-y-auto flex flex-col
           transition-transform duration-[380ms] ease-[cubic-bezier(0.32,0,0,1)]
@@ -992,22 +1022,26 @@ const Navbar = () => {
           ✕
         </button>
 
-        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 flex-shrink-0">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 flex-shrink-0">
+          {" "}
+          {/* Reduced padding */}
           <Link
             to="/"
             onClick={() => setMobNavOpen(false)}
-            className="flex items-center gap-2.5 no-underline"
+            className="flex items-center gap-2 no-underline" // Reduced gap
           >
-            <div className="w-9 h-9 bg-white/10 rounded-[9px] flex items-center justify-center overflow-hidden flex-shrink-0">
+            <div className="w-8 h-8 bg-white/10 rounded-[9px] flex items-center justify-center overflow-hidden flex-shrink-0">
+              {" "}
+              {/* Reduced from w-9 h-9 */}
               {logo ? (
                 <img
                   src={logo}
                   alt="AMESCO"
-                  className="w-6 h-6 object-contain drop-shadow-sm"
+                  className="w-5 h-5 object-contain drop-shadow-sm" // Reduced from w-6 h-6
                 />
               ) : (
                 <svg
-                  className="w-[18px] h-[18px]"
+                  className="w-[16px] h-[16px]" // Reduced
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="#fff"
@@ -1020,14 +1054,16 @@ const Navbar = () => {
                 </svg>
               )}
             </div>
-            <p className="font-['Playfair_Display'] text-[14px] font-black text-white">
+            <p className="font-['Playfair_Display'] text-xs font-black text-white">
+              {" "}
+              {/* Reduced from text-[14px] to text-xs */}
               <span className="text-[#E63946]">Armed Forces</span> SHS
             </p>
           </Link>
           <button
             onClick={() => setMobNavOpen(false)}
             aria-label="Close"
-            className="w-8 h-8 bg-white/10 rounded-lg border-none text-white text-sm
+            className="w-7 h-7 bg-white/10 rounded-lg border-none text-white text-sm // Reduced from w-8 h-8
               cursor-pointer flex items-center justify-center flex-shrink-0
               transition-colors duration-200 hover:bg-[#E63946]"
           >
@@ -1035,13 +1071,17 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="px-6 pt-4 pb-2 flex-shrink-0 sm:hidden">
-          <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2.5 border border-white/15">
+        <div className="px-5 pt-3 pb-2 flex-shrink-0 sm:hidden">
+          {" "}
+          {/* Reduced padding */}
+          <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2 border border-white/15">
+            {" "}
+            {/* Reduced padding */}
             <IcoSearch />
             <input
               type="text"
               placeholder="Search programmes, news…"
-              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50"
+              className="flex-1 bg-transparent text-xs text-white outline-none placeholder:text-white/50" // Reduced from text-sm
               aria-label="Search"
             />
           </div>
@@ -1050,13 +1090,15 @@ const Navbar = () => {
               setMobNavOpen(false);
               setInfoOpen(true);
             }}
-            className="flex items-center justify-center gap-2 w-full mt-2.5 bg-white/10 border border-white/15 text-white/85 py-2.5 rounded-xl text-sm font-semibold transition-colors duration-200 hover:bg-white/15"
+            className="flex items-center justify-center gap-2 w-full mt-2 bg-white/10 border border-white/15 text-white/85 py-2 rounded-lg text-xs font-semibold transition-colors duration-200 hover:bg-white/15" // Reduced padding and text
           >
             <IcoMenu /> School Info
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto py-2">
+        <div className="flex-1 overflow-y-auto py-1.5">
+          {" "}
+          {/* Reduced from py-2 */}
           {NAV_LINKS.map((link) => (
             <MobileNavItem
               key={link.to}
@@ -1066,12 +1108,20 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="px-6 py-5 border-t border-white/10 flex-shrink-0 space-y-3">
-          <div className="bg-[#E63946]/15 border border-[#E63946]/30 rounded-xl p-3 text-center">
-            <p className="text-[10px] text-white/40 tracking-[1.2px] uppercase">
+        <div className="px-5 py-4 border-t border-white/10 flex-shrink-0 space-y-2.5">
+          {" "}
+          {/* Reduced padding */}
+          <div className="bg-[#E63946]/15 border border-[#E63946]/30 rounded-lg p-2.5 text-center">
+            {" "}
+            {/* Reduced padding */}
+            <p className="text-[9px] text-white/40 tracking-[1.2px] uppercase">
+              {" "}
+              {/* Reduced from text-[10px] */}
               School Motto
             </p>
-            <p className="font-['Playfair_Display'] text-sm font-bold text-white mt-1">
+            <p className="font-['Playfair_Display'] text-xs font-bold text-white mt-0.5">
+              {" "}
+              {/* Reduced from text-sm */}
               "Mmarima Mma" — <span className="text-[#E63946]">Excellence</span>
             </p>
           </div>
@@ -1079,7 +1129,7 @@ const Navbar = () => {
             to="/admissions/apply"
             onClick={() => setMobNavOpen(false)}
             className="flex items-center justify-center gap-2 w-full bg-[#E63946] text-white
-              py-3.5 rounded-full text-sm font-bold no-underline
+              py-3 rounded-full text-xs font-bold no-underline // Reduced from py-3.5, text-sm to text-xs
               transition-colors duration-200 hover:bg-[#c1121f]"
           >
             Apply Now <IcoArrow />

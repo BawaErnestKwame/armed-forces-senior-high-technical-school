@@ -167,7 +167,7 @@ const About = () => {
           <div>
 
             {/* Section tag */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-2">
               <IcoGroup/>
               <span
                 className="text-[12px] font-tracking-[1.2px] font-extrabold uppercase"
@@ -179,10 +179,10 @@ const About = () => {
 
             {/* Heading */}
             <h2
-              className=" text-3xl   font-black leading-[1]  mb-8"
+              className=" text-3xl   font-black leading-[1]  mb-4"
               style={{ color: C.royalBlueDark }}
             >
-              An International Standard of Excellence School
+           Mmarima Mma
             </h2>
 
             {/* ── Tabs ── */}

@@ -1,4 +1,4 @@
-// src/App.jsx — example usage of Footer + ScrollToTop
+// src/App.jsx
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './component/common/Navbar'
@@ -6,28 +6,26 @@ import Footer from './component/common/Footer'
 import { ScrollToTop } from './component/common/Footer'
 import Home from "./component/Home"
 import Contact from "./Pages/Contact/component/Contact"
-
 import AboutUs from './Pages/About/AboutUs';
 import Leaders from './Pages/About/Leaders';
-import HowToApply from './Pages/Admissions/HowToApply';
-
+import HowToApply from "./Pages/Admissions/howToapply/HowToApply";
+import ApplyNow from "./Pages/admissions/applyNow/ApplyNow";
 
 const App = () => (
   <div>
-  
     <Navbar/>
     <Routes>
       <Route path="/" element={<Home/>}/>
-      {/* add more routes here */}
       <Route path="/contact" element={<Contact/>}/>
-      <Route path="/aboutUs" element ={<AboutUs/>}/>
-      <Route path="/leaders" element={<Leaders/>}/>
-      <Route path="/howtoApply" element={<HowToApply/>}/>
+      {/* Match Navbar paths exactly */}
+      <Route path="/about" element={<AboutUs/>}/>
+      <Route path="/about/leaders" element={<Leaders/>}/>
+      <Route path="/admissions/howToapply/howToApply" element={<HowToApply/>}/>
+      <Route path="/admissions/applyNow/applyNow" element={<ApplyNow/> }/>
     </Routes>
     <Footer/>
-    <ScrollToTop/>   {/* fixed position — always on top of everything */}
+    <ScrollToTop/>
   </div>
-  
 )
 
 export default App
