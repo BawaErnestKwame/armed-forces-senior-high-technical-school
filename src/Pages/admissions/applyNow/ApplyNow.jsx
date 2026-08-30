@@ -58,10 +58,12 @@ const ApplyNow = () => {
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Validate file type
       if (!["image/jpeg", "image/png", "image/jpg"].includes(file.type)) {
         alert("Please upload a JPEG or PNG image");
         return;
       }
+      // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         alert("File size should be less than 5MB");
         return;
@@ -188,11 +190,10 @@ const ApplyNow = () => {
       ? C.accentRed
       : focused === name
         ? C.accentRed
-        : "rgba(255,255,255,0.2)",
-    boxShadow: focused === name ? "0 0 0 4px rgba(230,57,70,0.15)" : "none",
-    background:
-      focused === name ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.05)",
-    color: "#FFFFFF",
+        : C.mediumGray,
+    boxShadow: focused === name ? "0 0 0 3px rgba(230,57,70,0.1)" : "none",
+    background: C.white,
+    color: C.darkGray,
     fontFamily: "inherit",
     transition: "all 0.3s ease",
   });
@@ -200,8 +201,8 @@ const ApplyNow = () => {
   const inputCls = `
     w-full px-4 py-3.5 rounded-xl text-[14px] outline-none
     border-2 transition-all duration-300
-    placeholder:text-white/50 bg-white/5 backdrop-blur-sm
-    text-white
+    placeholder:text-gray-400
+    text-gray-800
   `;
 
   const programmes = [
@@ -214,7 +215,7 @@ const ApplyNow = () => {
     "Agricultural Science",
   ];
 
-  // ─── Steps data for sidebar ─── CORRECTED: Only 3 steps ──────────────
+  // ─── Steps data for sidebar ──────────────────────────────────────────────
   const steps = [
     {
       number: 1,
@@ -238,14 +239,14 @@ const ApplyNow = () => {
 
   // ─── Application Preview ──────────────────────────────────────────────────
   const ApplicationPreview = () => (
-    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 space-y-4">
-      <h3 className="text-white font-bold text-lg flex items-center gap-2">
+    <div className="bg-gray-50 rounded-2xl p-6 space-y-4 border border-gray-200">
+      <h3 className="text-gray-800 font-bold text-lg flex items-center gap-2">
         <span>📋</span> Review Your Application
       </h3>
 
       {passportPreview && (
         <div className="flex justify-center">
-          <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white/20">
+          <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#E63946]/20">
             <img
               src={passportPreview}
               alt="Passport"
@@ -256,71 +257,71 @@ const ApplyNow = () => {
       )}
 
       <div className="grid grid-cols-2 gap-2 text-sm">
-        <p className="text-white/50">Full Name:</p>
-        <p className="text-white font-medium">
+        <p className="text-gray-500">Full Name:</p>
+        <p className="text-gray-800 font-medium">
           {form.firstName} {form.lastName}
         </p>
 
-        <p className="text-white/50">Email:</p>
-        <p className="text-white font-medium">{form.email}</p>
+        <p className="text-gray-500">Email:</p>
+        <p className="text-gray-800 font-medium">{form.email}</p>
 
-        <p className="text-white/50">Phone:</p>
-        <p className="text-white font-medium">{form.phone}</p>
+        <p className="text-gray-500">Phone:</p>
+        <p className="text-gray-800 font-medium">{form.phone}</p>
 
-        <p className="text-white/50">Date of Birth:</p>
-        <p className="text-white font-medium">{form.dateOfBirth}</p>
+        <p className="text-gray-500">Date of Birth:</p>
+        <p className="text-gray-800 font-medium">{form.dateOfBirth}</p>
 
-        <p className="text-white/50">Gender:</p>
-        <p className="text-white font-medium">{form.gender}</p>
+        <p className="text-gray-500">Gender:</p>
+        <p className="text-gray-800 font-medium">{form.gender}</p>
 
-        <p className="text-white/50">Nationality:</p>
-        <p className="text-white font-medium">{form.nationality}</p>
+        <p className="text-gray-500">Nationality:</p>
+        <p className="text-gray-800 font-medium">{form.nationality}</p>
 
-        <p className="text-white/50">Previous School:</p>
-        <p className="text-white font-medium">{form.previousSchool}</p>
+        <p className="text-gray-500">Previous School:</p>
+        <p className="text-gray-800 font-medium">{form.previousSchool}</p>
 
-        <p className="text-white/50">Programme:</p>
-        <p className="text-white font-medium">{form.programme}</p>
+        <p className="text-gray-500">Programme:</p>
+        <p className="text-gray-800 font-medium">{form.programme}</p>
 
-        <p className="text-white/50">Grade:</p>
-        <p className="text-white font-medium">{form.grade}</p>
+        <p className="text-gray-500">Grade:</p>
+        <p className="text-gray-800 font-medium">{form.grade}</p>
 
-        <p className="text-white/50">Parent/Guardian:</p>
-        <p className="text-white font-medium">{form.parentName}</p>
+        <p className="text-gray-500">Parent/Guardian:</p>
+        <p className="text-gray-800 font-medium">{form.parentName}</p>
 
-        <p className="text-white/50">Parent Phone:</p>
-        <p className="text-white font-medium">{form.parentPhone}</p>
+        <p className="text-gray-500">Parent Phone:</p>
+        <p className="text-gray-800 font-medium">{form.parentPhone}</p>
 
-        <p className="text-white/50">Parent Email:</p>
-        <p className="text-white font-medium">{form.parentEmail}</p>
+        <p className="text-gray-500">Parent Email:</p>
+        <p className="text-gray-800 font-medium">{form.parentEmail}</p>
 
-        <p className="text-white/50">Address:</p>
-        <p className="text-white font-medium text-xs">{form.address}</p>
+        <p className="text-gray-500">Address:</p>
+        <p className="text-gray-800 font-medium text-xs">{form.address}</p>
       </div>
 
       {form.message && (
         <div>
-          <p className="text-white/50 text-sm">Message:</p>
-          <p className="text-white text-sm mt-1">{form.message}</p>
+          <p className="text-gray-500 text-sm">Message:</p>
+          <p className="text-gray-800 text-sm mt-1">{form.message}</p>
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2 pt-2 border-t border-white/10">
+      <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-200">
         <button
           onClick={() => handleEdit(1)}
-          className="text-xs text-white/60 hover:text-white transition-colors underline"
+          className="text-xs text-[#E63946] hover:text-[#c1121f] transition-colors underline"
         >
           Edit Personal Info
         </button>
         <button
           onClick={() => handleEdit(2)}
-          className="text-xs text-white/60 hover:text-white transition-colors underline"
+          className="text-xs text-[#E63946] hover:text-[#c1121f] transition-colors underline"
         >
           Edit Academic Details
         </button>
         <button
           onClick={() => handleEdit(3)}
-          className="text-xs text-white/60 hover:text-white transition-colors underline"
+          className="text-xs text-[#E63946] hover:text-[#c1121f] transition-colors underline"
         >
           Edit Parent Info
         </button>
@@ -424,7 +425,7 @@ const ApplyNow = () => {
                     })}
                   </div>
 
-                  {/* Progress Bar - Fixed to use 3 steps */}
+                  {/* Progress Bar */}
                   <div className="mt-4 pt-4 border-t border-gray-100">
                     <div className="flex justify-between text-xs text-gray-500 mb-1">
                       <span>Progress</span>
@@ -465,34 +466,31 @@ const ApplyNow = () => {
                 <div
                   className="rounded-xl px-5 py-4 mb-6 flex items-center gap-3"
                   style={{
-                    background: "rgba(46, 213, 115, 0.15)",
+                    background: "rgba(46, 213, 115, 0.1)",
                     border: "1px solid rgba(46, 213, 115, 0.3)",
-                    backdropFilter: "blur(10px)",
                   }}
                 >
                   <span style={{ color: C.success, fontSize: 24 }}>✓</span>
                   <div>
-                    <p className="text-[14px] font-semibold text-white">
+                    <p className="text-[14px] font-semibold text-gray-800">
                       Application submitted successfully!
                     </p>
-                    <p className="text-white/70 text-sm">
+                    <p className="text-gray-600 text-sm">
                       We'll contact you within 24 hours at {form.email}
                     </p>
                   </div>
                 </div>
               )}
 
+              {/* ─── Form Container ─── White Background ────────────── */}
               <div
                 className="rounded-3xl p-8 relative overflow-hidden"
                 style={{
-                  background:
-                    "linear-gradient(145deg, #0a0a5c 0%, #1a1a7a 100%)",
-                  boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+                  background: C.white,
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.08)",
+                  border: "1px solid #e9ecef",
                 }}
               >
-                <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-[#E63946]/10 blur-3xl" />
-                <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#0e07dd]/10 blur-3xl" />
-
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-[11px] font-bold text-[#E63946] tracking-[2px] uppercase">
@@ -501,12 +499,12 @@ const ApplyNow = () => {
                     <div className="h-px flex-1 bg-[#E63946]/30" />
                   </div>
 
-                  <h2 className="font-['Playfair_Display'] text-white text-[26px] font-black mb-1">
+                  <h2 className="font-['Playfair_Display'] text-[#261481] text-[26px] font-black mb-1">
                     {currentStep === 1 && "Personal Information"}
                     {currentStep === 2 && "Academic Details"}
                     {currentStep === 3 && "Parent/Guardian Information"}
                   </h2>
-                  <p className="text-[13px] mb-6 text-gray-300">
+                  <p className="text-[13px] mb-6 text-gray-500">
                     {currentStep === 1 &&
                       "Tell us about yourself and upload your passport photo."}
                     {currentStep === 2 &&
@@ -519,11 +517,55 @@ const ApplyNow = () => {
                     {/* ─── Step 1: Personal Information ───────────────── */}
                     {currentStep === 1 && (
                       <div className="space-y-4">
-                        {/* Passport Photo Upload */}
-                        <div className="border-2 border-dashed border-white/20 rounded-xl p-4 hover:border-[#E63946] transition-all">
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                        {/* Passport Photo Upload with White Background Requirement */}
+                        <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 hover:border-[#E63946] transition-all">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Passport Photo *
                           </label>
+
+                          {/* ═══ PHOTO REQUIREMENTS ═══ */}
+                          <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                            <div className="flex items-start gap-2">
+                              <span className="text-blue-500 text-sm mt-0.5">
+                                📸
+                              </span>
+                              <div>
+                                <p className="text-xs font-semibold text-blue-700">
+                                  Passport Photo Requirements:
+                                </p>
+                                <ul className="text-xs text-blue-600 space-y-0.5 mt-1">
+                                  <li className="flex items-center gap-1.5">
+                                    <span>•</span>
+                                    <span>
+                                      <strong>White background</strong> only
+                                    </span>
+                                  </li>
+                                  <li className="flex items-center gap-1.5">
+                                    <span>•</span>
+                                    <span>JPEG or PNG format</span>
+                                  </li>
+                                  <li className="flex items-center gap-1.5">
+                                    <span>•</span>
+                                    <span>Maximum file size: 5MB</span>
+                                  </li>
+                                  <li className="flex items-center gap-1.5">
+                                    <span>•</span>
+                                    <span>
+                                      Clear, recent photo with neutral
+                                      expression
+                                    </span>
+                                  </li>
+                                  <li className="flex items-center gap-1.5">
+                                    <span>•</span>
+                                    <span>
+                                      No hats, sunglasses, or other accessories
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
                           <div className="flex flex-col sm:flex-row items-center gap-4">
                             <div className="flex-1 w-full">
                               <input
@@ -531,10 +573,10 @@ const ApplyNow = () => {
                                 type="file"
                                 accept=".jpg,.jpeg,.png"
                                 onChange={handlePhotoChange}
-                                className="w-full text-white/70 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#E63946] file:text-white hover:file:bg-[#c1121f] cursor-pointer"
+                                className="w-full text-gray-600 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#E63946] file:text-white hover:file:bg-[#c1121f] cursor-pointer"
                               />
-                              <p className="text-white/40 text-xs mt-1">
-                                JPEG or PNG, max 5MB
+                              <p className="text-gray-400 text-xs mt-1">
+                                Upload a photo with a white background
                               </p>
                               {errors.passportPhoto && (
                                 <p className="text-[#E63946] text-xs mt-1">
@@ -545,7 +587,7 @@ const ApplyNow = () => {
 
                             {passportPreview && (
                               <div className="flex flex-col items-center">
-                                <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-white/30">
+                                <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-gray-300">
                                   <img
                                     src={passportPreview}
                                     alt="Passport"
@@ -559,7 +601,7 @@ const ApplyNow = () => {
                                     ✕
                                   </button>
                                 </div>
-                                <span className="text-[10px] text-white/50 mt-1">
+                                <span className="text-[10px] text-gray-400 mt-1">
                                   Preview
                                 </span>
                               </div>
@@ -569,7 +611,7 @@ const ApplyNow = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               First Name *
                             </label>
                             <input
@@ -591,7 +633,7 @@ const ApplyNow = () => {
                             )}
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               Last Name *
                             </label>
                             <input
@@ -616,7 +658,7 @@ const ApplyNow = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               Email Address *
                             </label>
                             <input
@@ -638,7 +680,7 @@ const ApplyNow = () => {
                             )}
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               Phone Number *
                             </label>
                             <input
@@ -663,7 +705,7 @@ const ApplyNow = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               Date of Birth *
                             </label>
                             <input
@@ -684,7 +726,7 @@ const ApplyNow = () => {
                             )}
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               Gender *
                             </label>
                             <select
@@ -698,18 +740,16 @@ const ApplyNow = () => {
                               style={{
                                 ...fieldStyle("gender"),
                                 appearance: "none",
-                                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundPosition: "right 16px center",
                                 paddingRight: "40px",
                               }}
                             >
-                              <option value="" className="text-gray-800">
-                                Select gender
-                              </option>
-                              <option className="text-gray-800">Male</option>
-                              <option className="text-gray-800">Female</option>
-                              <option className="text-gray-800">Other</option>
+                              <option value="">Select gender</option>
+                              <option>Male</option>
+                              <option>Female</option>
+                              <option>Other</option>
                             </select>
                             {errors.gender && (
                               <p className="text-[#E63946] text-xs mt-1">
@@ -720,7 +760,7 @@ const ApplyNow = () => {
                         </div>
 
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Nationality *
                           </label>
                           <input
@@ -748,7 +788,7 @@ const ApplyNow = () => {
                     {currentStep === 2 && (
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Previous School *
                           </label>
                           <input
@@ -771,7 +811,7 @@ const ApplyNow = () => {
                         </div>
 
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Programme of Interest *
                           </label>
                           <select
@@ -785,19 +825,15 @@ const ApplyNow = () => {
                             style={{
                               ...fieldStyle("programme"),
                               appearance: "none",
-                              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                               backgroundRepeat: "no-repeat",
                               backgroundPosition: "right 16px center",
                               paddingRight: "40px",
                             }}
                           >
-                            <option value="" className="text-gray-800">
-                              Select a programme
-                            </option>
+                            <option value="">Select a programme</option>
                             {programmes.map((p) => (
-                              <option key={p} className="text-gray-800">
-                                {p}
-                              </option>
+                              <option key={p}>{p}</option>
                             ))}
                           </select>
                           {errors.programme && (
@@ -808,7 +844,7 @@ const ApplyNow = () => {
                         </div>
 
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Grade/Class *
                           </label>
                           <select
@@ -822,18 +858,16 @@ const ApplyNow = () => {
                             style={{
                               ...fieldStyle("grade"),
                               appearance: "none",
-                              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                               backgroundRepeat: "no-repeat",
                               backgroundPosition: "right 16px center",
                               paddingRight: "40px",
                             }}
                           >
-                            <option value="" className="text-gray-800">
-                              Select grade
-                            </option>
-                            <option className="text-gray-800">SHS 1</option>
-                            <option className="text-gray-800">SHS 2</option>
-                            <option className="text-gray-800">SHS 3</option>
+                            <option value="">Select grade</option>
+                            <option>SHS 1</option>
+                            <option>SHS 2</option>
+                            <option>SHS 3</option>
                           </select>
                           {errors.grade && (
                             <p className="text-[#E63946] text-xs mt-1">
@@ -843,7 +877,7 @@ const ApplyNow = () => {
                         </div>
 
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Additional Message
                           </label>
                           <textarea
@@ -869,7 +903,7 @@ const ApplyNow = () => {
                     {currentStep === 3 && (
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Parent/Guardian Name *
                           </label>
                           <input
@@ -893,7 +927,7 @@ const ApplyNow = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               Parent Phone *
                             </label>
                             <input
@@ -915,7 +949,7 @@ const ApplyNow = () => {
                             )}
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                            <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                               Parent Email *
                             </label>
                             <input
@@ -939,7 +973,7 @@ const ApplyNow = () => {
                         </div>
 
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-white/70">
+                          <label className="block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-gray-600">
                             Home Address *
                           </label>
                           <textarea
@@ -965,7 +999,7 @@ const ApplyNow = () => {
                           )}
                         </div>
 
-                        <div className="flex items-start gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
+                        <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200">
                           <input
                             type="checkbox"
                             id="terms"
@@ -974,7 +1008,7 @@ const ApplyNow = () => {
                           />
                           <label
                             htmlFor="terms"
-                            className="text-sm text-white/80 leading-relaxed"
+                            className="text-sm text-gray-600 leading-relaxed"
                           >
                             I confirm that all information provided is accurate
                             and complete. I agree to the
@@ -1004,7 +1038,7 @@ const ApplyNow = () => {
                           <button
                             type="button"
                             onClick={handlePrevStep}
-                            className="flex items-center justify-center gap-2 text-white font-bold text-[14px] px-8 py-3.5 rounded-full border-2 border-white/30 hover:border-white/60 transition-all duration-300 hover:-translate-y-0.5"
+                            className="flex items-center justify-center gap-2 text-gray-700 font-bold text-[14px] px-8 py-3.5 rounded-full border-2 border-gray-300 hover:border-[#E63946] hover:text-[#E63946] transition-all duration-300 hover:-translate-y-0.5"
                           >
                             ← Previous
                           </button>
@@ -1050,7 +1084,7 @@ const ApplyNow = () => {
                         <button
                           type="button"
                           onClick={() => setShowPreview(false)}
-                          className="flex items-center justify-center gap-2 text-white font-bold text-[14px] px-8 py-3.5 rounded-full border-2 border-white/30 hover:border-white/60 transition-all duration-300"
+                          className="flex items-center justify-center gap-2 text-gray-700 font-bold text-[14px] px-8 py-3.5 rounded-full border-2 border-gray-300 hover:border-[#E63946] hover:text-[#E63946] transition-all duration-300"
                         >
                           ← Back to Edit
                         </button>

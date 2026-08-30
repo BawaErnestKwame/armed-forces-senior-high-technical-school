@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import bgImage from "/src/assets/slider1.jpeg";
 import { Link } from "react-router-dom";
 import gallery1 from "../../../assets/gallery/gallery1.jpg";
- import Person2Icon from "@mui/icons-material/Person2";
- import logo from "../../../assets/white_logo.png"
-import image from "../../../assets/howtoapplyimg.png"
-
+import Person2Icon from "@mui/icons-material/Person2";
+import image from "../../../assets/howtoapplyimg.png";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import SchoolIcon from "@mui/icons-material/School";
 
 // ─── Color tokens ─────────────────────────────────────────────────────────────
 const C = {
@@ -23,86 +23,37 @@ const C = {
 };
 
 const HowToApply = () => {
-  // ─── State for accordion/expandable steps ──────────────────────────────
-  const [openStep, setOpenStep] = useState(null);
-
-  const toggleStep = (index) => {
-    setOpenStep(openStep === index ? null : index);
-  };
-
   // ─── Application steps data ──────────────────────────────────────────────
   const applicationSteps = [
     {
       number: "01",
-      title: "Obtain Application Form",
+      title: "Step School Application Process",
       description:
-        "Download the application form from our website or collect a physical copy from the school administration office.",
-      details: [
-        "Forms are available from January to March each year",
-        "A non-refundable application fee of GHS 50 applies",
-        "Ensure you have a valid email address for correspondence",
-      ],
+        "Collect all required materials, including academic transcripts, identification papers, test scores (if needed), and any supporting documents before starting your application.",
     },
     {
       number: "02",
-      title: "Complete the Form",
+      title: "Purchase Voucher",
       description:
-        "Fill in all required details accurately. Incomplete forms will not be processed.",
-      details: [
-        "Provide valid contact information",
-        "Include previous school details and academic records",
-        "Attach passport-sized photographs",
-        "Indicate your preferred programmes",
-      ],
+        "Purchase an application voucher from designated banks or our online platform.",
     },
     {
       number: "03",
-      title: "Submit Required Documents",
+      title: "Login to your Account",
       description:
-        "Submit the completed form along with all necessary supporting documents.",
-      details: [
-        "Birth certificate or proof of age",
-        "Last two academic reports",
-        "Testimonial from previous school",
-        "Medical report",
-        "Two reference letters",
-      ],
+        "Login to your account to get started with your application.",
     },
     {
       number: "04",
-      title: "Entrance Examination",
+      title: "Complete Application",
       description:
-        "All applicants are required to take the AMESCO entrance examination.",
-      details: [
-        "Exams are held in March/April annually",
-        "Subjects: English, Mathematics, and General Science",
-        "Past questions available for purchase at the school",
-        "Examination fee: GHS 100",
-      ],
+        "Fill in your academic history, upload documents, and select your preferred programs.",
     },
     {
       number: "05",
-      title: "Interview & Selection",
+      title: "Track Your Application",
       description:
-        "Shortlisted candidates will be invited for an interview with the admissions committee.",
-      details: [
-        "Interviews are conducted in May",
-        "Parents/Guardians are required to attend",
-        "Selection is based on exam performance and interview",
-        "Successful candidates will receive admission letters",
-      ],
-    },
-    {
-      number: "06",
-      title: "Acceptance & Registration",
-      description:
-        "Accept your offer and complete the registration process to secure your place.",
-      details: [
-        "Acceptance deadline: 2 weeks from receipt of offer",
-        "Pay the required acceptance and tuition fees",
-        "Complete medical and boarding forms",
-        "Attend orientation program in August",
-      ],
+        "Login anytime to check your application status and admission results.",
     },
   ];
 
@@ -238,8 +189,7 @@ const HowToApply = () => {
                     style={{ background: "rgba(230,57,70,0.1)" }}
                   >
                     <span className="text-xl" style={{ color: C.accentRed }}>
-                   
-                    <Person2Icon/>
+                      <Person2Icon />
                     </span>
                   </div>
                   <div>
@@ -265,83 +215,119 @@ const HowToApply = () => {
 
       {/* ══ APPLICATION STEPS ────────────────────────────────────────────── */}
       <section id="steps" className="py-20" style={{ background: C.lightGray }}>
-        <div className="max-w-[1220px] flex gap-4 flex-col md:flex mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
-          <div className="text-center mb-16">
-            <img src={image} alt="" className="rounded-2xl" />
-           
+        <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <span
+                className="text-[12px] font-bold uppercase tracking-[2px]"
+                style={{ color: C.accentRed }}
+              >
+                Application Process
+              </span>
+              <div className="h-px w-12" style={{ background: C.accentRed }} />
+            </div>
+            <h2
+              className="font-['Playfair_Display'] text-[36px] sm:text-[42px] font-black"
+              style={{ color: C.navy }}
+            >
+              Simple Steps to <span style={{ color: C.accentRed }}>Apply</span>
+            </h2>
+            <p
+              className="text-[15px] mt-3 max-w-[600px] mx-auto"
+              style={{ color: C.bodyText }}
+            >
+              Follow these simple steps to complete your application to AMESCO
+            </p>
           </div>
 
-          {/* Steps grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {applicationSteps.map((step, index) => (
+          {/* Image on left, Steps on right - side by side layout */}
+          <div className="flex flex-col lg:flex-row gap-12 items-start">
+            {/* Left side - Image with hover effect only */}
+            <div className="w-full lg:w-2/5 flex-shrink-0 sticky top-24">
+              <div className="relative rounded-2xl overflow-hidden group">
+                <img
+                  src={image}
+                  alt="How to Apply at AMESCO"
+                  className="w-full h-auto object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+            </div>
+
+            {/* Right side - Steps list */}
+            <div className="w-full lg:w-3/5">
+              <div className="space-y-4">
+                {applicationSteps.map((step, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:border-l-4 hover:border-[#E63946]"
+                    style={{
+                      boxShadow: "0 2px 12px rgba(0,0,0,.06)",
+                      borderLeft: `4px solid ${C.mediumGray}`,
+                    }}
+                  >
+                    <div className="flex items-start gap-4">
+                      {/* Step Number - Large with circle */}
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center text-[18px] font-black bg-gray-100 text-gray-400 transition-all duration-300 group-hover:bg-[#E63946] group-hover:text-white">
+                          {String(index + 1).padStart(2, "0")}
+                        </div>
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        {/* Title */}
+                        <h3
+                          className="font-['Playfair_Display'] text-[18px] font-bold mb-1 transition-colors duration-300 group-hover:text-[#E63946]"
+                          style={{ color: C.navy }}
+                        >
+                          {step.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p
+                          className="text-[14px] leading-relaxed"
+                          style={{ color: C.bodyText }}
+                        >
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Additional Info Box */}
               <div
-                key={index}
-                className="bg-white rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+                className="mt-8 rounded-2xl p-6 flex items-start gap-4 transition-all duration-300 hover:shadow-lg"
                 style={{
-                  boxShadow: "0 4px 20px rgba(0,0,0,.06)",
-                  borderTop: `4px solid ${C.accentRed}`,
+                  background: "rgba(230, 57, 70, 0.05)",
+                  border: `1px solid rgba(230, 57, 70, 0.15)`,
                 }}
-                onClick={() => toggleStep(index)}
               >
-                {/* Step number */}
-                <div
-                  className="text-[40px] font-black leading-none mb-3"
-                  style={{ color: C.accentRed }}
-                >
-                  {step.number}
-                </div>
-
-                {/* Title */}
-                <h3
-                  className="font-['Playfair_Display'] text-[18px] font-bold mb-2"
-                  style={{ color: C.navy }}
-                >
-                  {step.title}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="text-[13.5px] leading-relaxed mb-3"
-                  style={{ color: C.bodyText }}
-                >
-                  {step.description}
-                </p>
-
-                {/* Expandable details */}
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    openStep === index
-                      ? "max-h-[500px] opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <ul className="space-y-2 pt-3 border-t border-gray-100">
-                    {step.details.map((detail, i) => (
-                      <li
-                        key={i}
-                        className="text-[13px] flex items-start gap-2"
-                        style={{ color: C.bodyText }}
-                      >
-                        <span
-                          className="inline-block w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
-                          style={{ background: C.accentRed }}
-                        />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Toggle indicator */}
-                <div
-                  className="mt-3 text-[12px] font-semibold uppercase tracking-[1px]"
-                  style={{ color: C.accentRed }}
-                >
-                  {openStep === index ? "▼ Read less" : "▶ Click for details"}
+                <CheckCircleIcon
+                  sx={{ color: C.accentRed, fontSize: 28, flexShrink: 0 }}
+                />
+                <div>
+                  <h4
+                    className="font-bold text-[15px]"
+                    style={{ color: C.navy }}
+                  >
+                    Need Help?
+                  </h4>
+                  <p className="text-[13.5px]" style={{ color: C.bodyText }}>
+                    Our admissions team is here to assist you every step of the
+                    way. Contact us at{" "}
+                    <a
+                      href="mailto:armedforcesshts@yahoo.com"
+                      style={{ color: C.accentRed }}
+                      className="font-semibold hover:underline"
+                    >
+                      armedforcesshts@yahoo.com
+                    </a>
+                  </p>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
 
           {/* ══ CTA Section ────────────────────────────────────────────────── */}
@@ -419,7 +405,10 @@ const HowToApply = () => {
                 { date: "August 15", event: "Orientation Day" },
                 { date: "September 1", event: "Academic Year Begins" },
               ].map((item, i) => (
-                <div key={i} className="text-center p-4 rounded-xl bg-gray-50">
+                <div
+                  key={i}
+                  className="text-center p-4 rounded-xl bg-gray-50 hover:bg-white transition-all duration-300 hover:shadow-md"
+                >
                   <p
                     className="font-bold text-[16px]"
                     style={{ color: C.accentRed }}

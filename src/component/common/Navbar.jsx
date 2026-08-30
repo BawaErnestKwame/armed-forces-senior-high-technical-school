@@ -746,7 +746,7 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
       </div>
       {/* Apply CTA */}
       <Link
-        to="/admissions/apply"
+        to="/auth/signIn"
         onClick={onClose}
         className="flex items-center justify-center gap-2 w-full bg-white text-[#c1121f] py-3.5 rounded-full text-sm font-extrabold no-underline shadow-[0_6px_24px_rgba(0,0,0,.2)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(0,0,0,.25)] mt-1" // Reduced from py-4, text-[15px] to text-sm
       >
@@ -974,7 +974,7 @@ const Navbar = () => {
               </button>
               {/* Apply Now — lg+ only */}
               <Link
-                to="/admissions/apply"
+                to="/auth/signIn"
                 className="hidden lg:inline-flex apply-ring items-center gap-1.5 bg-[#E63946] text-white // Reduced from gap-2
                   px-4 py-1.5 rounded-full text-xs font-bold no-underline // Reduced from px-5 py-2, text-sm to text-xs
                   transition-all duration-200 hover:bg-[#c1121f] hover:-translate-y-0.5
