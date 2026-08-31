@@ -972,9 +972,18 @@ const Navbar = () => {
               >
                 <IcoMenu />
               </button>
-              {/* Apply Now — lg+ only */}
               <Link
                 to="/auth/signIn"
+                className="hidden lg:inline-flex apply-ring items-center gap-1.5 bg-[#E63946] text-white // Reduced from gap-2
+                  px-4 py-1.5 rounded-full text-xs font-bold no-underline // Reduced from px-5 py-2, text-sm to text-xs
+                  transition-all duration-200 hover:bg-[#c1121f] hover:-translate-y-0.5
+                  hover:shadow-none flex-shrink-0"
+              >
+                Sign In <IcoArrow />
+              </Link>
+              {/* Apply Now — lg+ only */}
+              <Link
+                to="/pincode/evoucher"
                 className="hidden lg:inline-flex apply-ring items-center gap-1.5 bg-[#E63946] text-white // Reduced from gap-2
                   px-4 py-1.5 rounded-full text-xs font-bold no-underline // Reduced from px-5 py-2, text-sm to text-xs
                   transition-all duration-200 hover:bg-[#c1121f] hover:-translate-y-0.5

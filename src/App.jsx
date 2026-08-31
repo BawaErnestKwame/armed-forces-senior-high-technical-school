@@ -11,6 +11,7 @@ import Leaders from './Pages/About/Leaders';
 import HowToApply from "./Pages/Admissions/howToapply/HowToApply";
 import ApplyNow from "./Pages/admissions/applyNow/ApplyNow";
 import SignIn from './auth/SignIn';
+import Evoucher from './Pages/pincode/Evoucher';
 
 
 
@@ -39,6 +40,7 @@ const App = () => {
          <Route path="/admissions/applyNow/applyNow" element={<ApplyNow />} />
 
          <Route path="/auth/signIn" element={<SignIn />} />
+         <Route path="/pincode/evoucher" element={<Evoucher/> }/>
        </Routes>
        {!hide && <Footer />}
        <ScrollToTop />
