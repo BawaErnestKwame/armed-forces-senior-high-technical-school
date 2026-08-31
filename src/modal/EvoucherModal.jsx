@@ -13,7 +13,7 @@ const EvoucherModal = ({ isOpen, onClose }) => {
     phone: "",
     paymentMethod: "mobile-money",
   });
-  const [step, setStep] = useState(1); // 1: Form, 2: Processing, 3: Success
+  const [step, setStep] = useState(1); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +50,7 @@ const EvoucherModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 animate-fadeIn">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 animate-fadeIn">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -71,24 +71,19 @@ const EvoucherModal = ({ isOpen, onClose }) => {
         {step === 1 && (
           <div className="p-6 md:p-8">
             <div className="text-center mb-8">
-              <div className="inline-block bg-amber-100 p-3 rounded-2xl mb-4">
-                <InventoryIcon sx={{ fontSize: "32px", color: "#b45309" }} />
+              <div className="inline-block  p-3 rounded-2xl mb-4">
+                <InventoryIcon sx={{ fontSize: "32px", color: "#0e07dd" }} />
               </div>
               <h2 className="text-2xl font-bold text-gray-800">
                 Purchase Application eVoucher
               </h2>
               <p className="text-sm text-gray-500 mt-2 max-w-md mx-auto">
-                You will complete the process in a new tab. Once you are done,
-                you may return to this tab to check your transaction status with
-                the order ID sent to you or click on{" "}
-                <span className="font-semibold text-amber-700">
-                  I have paid (recommended)
-                </span>{" "}
-                if you do not receive your payment.
+                Enter your eVoucher details to proceed with the application
+                purchase.
               </p>
               <div className="mt-4 inline-block bg-amber-50 px-6 py-2 rounded-full border-2 border-amber-200">
                 <span className="text-2xl font-bold text-amber-700">
-                  GHT 180
+                  GHC 180
                 </span>
               </div>
             </div>
@@ -224,9 +219,9 @@ const EvoucherModal = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 className="w-full py-3 rounded-xl text-white font-bold text-sm transition-all duration-300 
-                  hover:-translate-y-0.5 hover:shadow-2xl bg-gradient-to-r from-amber-600 to-amber-700"
+                  hover:-translate-y-0.5 hover:shadow-2xl bg-[#E63946]"
               >
-                Pay Now - GHE180.00
+                Pay Now - GHC 180.00
               </button>
             </form>
           </div>

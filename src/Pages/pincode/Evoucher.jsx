@@ -1,4 +1,4 @@
-// Evoucher.jsx
+// Evoucher.jsx (updated)
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InventoryIcon from "@mui/icons-material/Inventory";
@@ -6,9 +6,11 @@ import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import EvoucherModal from "../../modal/EvoucherModal";
+import TransactionStatus from "./TransactionStatus";
 
 const Evoucher = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -66,9 +68,9 @@ const Evoucher = () => {
               Purchase eVoucher
             </button>
 
-            {/* Check Transaction Status Button */}
-            <Link
-              to="/transaction-status"
+            {/* Check Transaction Status Button - Opens Status Modal */}
+            <button
+              onClick={() => setIsStatusModalOpen(true)}
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl 
                 text-white font-bold text-sm transition-all duration-300 
                 hover:-translate-y-1 hover:shadow-2xl border-2 border-white/30
@@ -76,7 +78,7 @@ const Evoucher = () => {
             >
               <InventoryIcon sx={{ fontSize: "18px" }} />
               Check Transaction Status
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -193,10 +195,14 @@ const Evoucher = () => {
         </div>
       </div>
 
-      {/* ═══ Modal Component ═══ */}
+      {/* ═══ Modals ═══ */}
       <EvoucherModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+      />
+      <TransactionStatus
+        isOpen={isStatusModalOpen}
+        onClose={() => setIsStatusModalOpen(false)}
       />
     </div>
   );
