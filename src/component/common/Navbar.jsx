@@ -17,12 +17,12 @@ const NAV_LINKS = [
     to: "/academics",
     children: [
       { label: "General Science", to: "/academics/general-science" },
-      { label: "Technical", to: "/academics/technical" },
-      { label: "Business", to: "/academics/business" },
-      { label: "General Arts", to: "/academics/general-arts" },
-      { label: "Visual Arts", to: "/academics/visual-arts" },
-      { label: "Home Economics", to: "/academics/home-economics" },
-      { label: "Agricultural Science", to: "/academics/agricultural-science" },
+      { label: "Technical", to: "/academics/technical/technical" },
+      { label: "Business", to: "/academics/business/business" },
+      { label: "General Arts", to: "/academics/generalarts/generalArts" },
+      { label: "Visual Arts", to: "/academics/visualArts/visualArt" },
+      { label: "Home Economics", to: "/academics/home-economics/homeEconomics" },
+      { label: "Agricultural Science", to: "/academics/agric/agriculture" },
     ],
   },
 

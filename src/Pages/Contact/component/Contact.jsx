@@ -1,7 +1,8 @@
 // pages/Contact.jsx
 import React, { useState } from "react";
-import bgImage from "/src/assets/slider1.jpeg";
-import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import bgImage from "../../../assets/slider1.jpeg";
+import AcademicHero from "../../../component/common/AcademicHero";
 
 // ─── Color tokens ─────────────────────────────────────────────────────────────
 const C = {
@@ -16,6 +17,17 @@ const C = {
   darkGray: "#343a40",
   navy: "#261481",
   bodyText: "#4b5563",
+};
+
+// ─── Motion variants ──────────────────────────────────────────────────────────
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12 } },
 };
 
 // ─── Contact info cards ───────────────────────────────────────────────────────
@@ -97,22 +109,6 @@ const INFO_CARDS = [
   },
 ];
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
-const IcoArrow = () => (
-  <svg
-    className="w-4 h-4"
-    viewBox="0 0 16 16"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <line x1="2" y1="8" x2="14" y2="8" />
-    <polyline points="9,3 14,8 9,13" />
-  </svg>
-);
-
 // ─── Reusable input/textarea styles ──────────────────────────────────────────
 const inputCls = `
   w-full px-4 py-3.5 rounded-xl text-[14px] outline-none
@@ -162,64 +158,40 @@ const Contact = () => {
 
   return (
     <div>
-      {/* ══ HERO BANNER */}
-      <div
-        className="relative w-full flex h-full items-center justify-center overflow-hidden"
-        style={{ minHeight: 340 }}
-      >
-        <img
-          src={bgImage}
-          alt=""
-          className="absolute inset-0 w-full object-cover"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "rgba(10,8,80,.68)" }}
-        />
-        <div className="relative z-10 text-center px-6 py-16">
-          <h1
-            className="font-['Playfair_Display'] font-black text-white mb-4"
-            style={{ fontSize: "clamp(38px, 6vw, 64px)" }}
-          >
-            Contact
-          </h1>
-          <div className="flex hidden lg:flex flex-col justify-center mb-5">
-            <div
-              className="w-[70%] h-px relative left-16 hidden lg:flex"
-              style={{ background: "rgba(255,255,255,.5)" }}
-            />
-            <div className="w-30 h-0.5 hidden lg:flex relative -right-46 rounded-2xl bg-white" />
-          </div>
-          <p className="text-white text-[15px] mb-16 max-w-[500px] mx-auto">
-            Education goes beyond textbooks and classrooms. We believe in
-            empowering students to explore their passions and challenge
-            conventions.
-          </p>
-        </div>
-      </div>
+      <AcademicHero
+        image={bgImage}
+        title="Contact Us"
+        subtitle="Education goes beyond textbooks and classrooms. We believe in empowering students to explore their passions and challenge conventions."
+      />
 
-      {/* ══ INFO CARDS */}
+      {/* ══ INFO CARDS ══════════════════════════════════════════════════════ */}
       <div className="relative z-10 max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mt-14">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mt-14"
+        >
           {INFO_CARDS.map((card, i) => {
             const inner = (
-              <div
-                key={i}
-                className="bg-white rounded-2xl p-6 flex flex-col items-center text-center gap-3
-                  transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              <motion.div
+                variants={fadeUp}
+                whileHover={{ y: -8 }}
+                className="bg-white rounded-2xl p-6 flex flex-col items-center text-center gap-3"
                 style={{ boxShadow: "0 8px 32px rgba(0,0,0,.1)" }}
               >
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0
-                    transition-all duration-300 group-hover:scale-110"
+                <motion.div
+                  whileHover={{ scale: 1.12, backgroundColor: C.accentRed }}
+                  transition={{ duration: 0.3 }}
+                  className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{
                     background: `rgba(14,7,221,.08)`,
                     color: C.royalBlueDark,
                   }}
                 >
-                  {card.icon}
-                </div>
+                  <span className="group-hover:text-white">{card.icon}</span>
+                </motion.div>
                 <h4
                   className="font-['Playfair_Display'] text-[17px] font-black"
                   style={{ color: C.navy }}
@@ -235,7 +207,7 @@ const Contact = () => {
                     {line}
                   </p>
                 ))}
-              </div>
+              </motion.div>
             );
 
             return card.href ? (
@@ -252,7 +224,7 @@ const Contact = () => {
               <div key={i}>{inner}</div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
 
       {/* ══ FORM + MAP ══════════════════════════════════════════════════════ */}
@@ -260,7 +232,11 @@ const Contact = () => {
         <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
             {/* ── Contact Form ── */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, x: -32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
               className="rounded-3xl border-t-4 border-[#E63946] p-8 sm:p-10 relative overflow-hidden"
               style={{
                 background: "linear-gradient(145deg, #0a0a5c 0%, #1a1a7a 100%)",
@@ -288,21 +264,27 @@ const Contact = () => {
               </p>
 
               {/* Success banner */}
-              {sent && (
-                <div
-                  className="rounded-xl px-5 py-4 mb-6 flex items-center gap-3 relative z-10"
-                  style={{
-                    background: "rgba(46, 213, 115, 0.15)",
-                    border: "1px solid rgba(46, 213, 115, 0.3)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <span style={{ color: "#2ed573", fontSize: 20 }}>✓</span>
-                  <p className="text-[14px] font-semibold text-white">
-                    Message sent! We'll be in touch soon.
-                  </p>
-                </div>
-              )}
+              <AnimatePresence>
+                {sent && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -12, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: "auto" }}
+                    exit={{ opacity: 0, y: -12, height: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="rounded-xl px-5 py-4 mb-6 flex items-center gap-3 relative z-10"
+                    style={{
+                      background: "rgba(46, 213, 115, 0.15)",
+                      border: "1px solid rgba(46, 213, 115, 0.3)",
+                      backdropFilter: "blur(10px)",
+                    }}
+                  >
+                    <span style={{ color: "#2ed573", fontSize: 20 }}>✓</span>
+                    <p className="text-[14px] font-semibold text-white">
+                      Message sent! We'll be in touch soon.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <form
                 onSubmit={handleSubmit}
@@ -427,12 +409,14 @@ const Contact = () => {
                 </div>
 
                 {/* Submit */}
-                <button
+                <motion.button
                   type="submit"
                   disabled={sending || sent}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center justify-center gap-2.5 text-white font-bold
                     text-[15px] px-10 py-4 rounded-full border-none cursor-pointer
-                    transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl
+                    transition-shadow duration-300 hover:shadow-2xl
                     relative overflow-hidden group w-full sm:w-auto"
                   style={{
                     background: sending ? "#1a1a7a" : "#E63946",
@@ -470,15 +454,21 @@ const Contact = () => {
                   {!sending && !sent && (
                     <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                   )}
-                </button>
+                </motion.button>
               </form>
-            </div>
+            </motion.div>
 
             {/* ── Right side — additional info + map ── */}
-            <div className="flex flex-col gap-8">
-              {/* Why contact us */}
+            <motion.div
+              initial={{ opacity: 0, x: 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="flex flex-col gap-8"
+            >
+              {/* Visit our campus */}
               <div
-                className="bg-white rounded-3xl p-8 transition-all duration-300 hover:shadow-xl"
+                className="bg-white rounded-3xl p-8 transition-shadow duration-300 hover:shadow-xl"
                 style={{ boxShadow: "0 4px 24px rgba(0,0,0,.07)" }}
               >
                 <h3
@@ -488,7 +478,13 @@ const Contact = () => {
                   Visit Our Campus
                 </h3>
 
-                <div className="flex flex-col gap-5">
+                <motion.div
+                  variants={stagger}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.3 }}
+                  className="flex flex-col gap-5"
+                >
                   {[
                     {
                       num: "01",
@@ -506,18 +502,19 @@ const Contact = () => {
                       body: "Free parking is available at the main school compound for visiting parents and guests.",
                     },
                   ].map((item) => (
-                    <div
+                    <motion.div
                       key={item.num}
+                      variants={fadeUp}
                       className="flex gap-4 items-start group"
                     >
-                      <div
+                      <motion.div
+                        whileHover={{ scale: 1.12 }}
                         className="w-9 h-9 rounded-lg flex items-center justify-center
-                          text-white text-[12px] font-black flex-shrink-0
-                          transition-all duration-300 group-hover:scale-110"
+                          text-white text-[12px] font-black flex-shrink-0"
                         style={{ background: C.accentRed }}
                       >
                         {item.num}
-                      </div>
+                      </motion.div>
                       <div>
                         <p
                           className="font-bold text-[14px] mb-1"
@@ -532,14 +529,14 @@ const Contact = () => {
                           {item.body}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </div>
 
               {/* Map embed */}
               <div
-                className="rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl"
+                className="rounded-3xl overflow-hidden transition-shadow duration-300 hover:shadow-xl"
                 style={{ boxShadow: "0 4px 24px rgba(0,0,0,.1)", height: 300 }}
               >
                 <iframe
@@ -553,7 +550,7 @@ const Contact = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

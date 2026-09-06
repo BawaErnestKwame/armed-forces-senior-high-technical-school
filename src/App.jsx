@@ -12,6 +12,13 @@ import HowToApply from "./Pages/Admissions/howToapply/HowToApply";
 import ApplyNow from "./Pages/admissions/applyNow/ApplyNow";
 import SignIn from './auth/SignIn';
 import Evoucher from './Pages/pincode/Evoucher';
+import Agriculture from './Pages/academics/agric/Agriculture';
+import Business from './Pages/academics/business/Business';
+import GeneralArts from './Pages/academics/generalarts/GeneralArts';
+import Science from './Pages/academics/science/Science';
+import Technical from './Pages/academics/technical/Technical';
+import HomeEconomics from './Pages/academics/home-economics/HomeEconomics';
+import VisualArt from './Pages/academics/visualArt/VisualArt';
 
 
 
@@ -41,6 +48,15 @@ const App = () => {
 
          <Route path="/auth/signIn" element={<SignIn />} />
          <Route path="/pincode/evoucher" element={<Evoucher/> }/>
+         {/* Academics — match Navbar paths exactly */}
+         <Route path="/academics/agric/agriculture" element={<Agriculture/> }/>
+         <Route path="/academics/business/business" element={<Business/> }/>
+         <Route path="/academics/visualArts/visualArt" element={<VisualArt/> }/>
+         <Route path="/academics/generalarts/generalArts" element={<GeneralArts/> }/>
+         <Route path="/academics/general-science" element={<Science/> }/>
+         <Route path="/academics/technical/technical" element={<Technical/> }/>
+         <Route path="/academics/home-economics/homeEconomics" element={<HomeEconomics/> }/>
+
        </Routes>
        {!hide && <Footer />}
        <ScrollToTop />

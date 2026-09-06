@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import bgImage from "/src/assets/slider1.jpeg";
 import { Link } from "react-router-dom";
 import gallery1 from "../../../assets/gallery/gallery1.jpg";
@@ -6,6 +7,17 @@ import Person2Icon from "@mui/icons-material/Person2";
 import image from "../../../assets/howtoapplyimg.png";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SchoolIcon from "@mui/icons-material/School";
+import AcademicHero from "../../../component/common/AcademicHero";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12 } },
+};
 
 // ─── Color tokens ─────────────────────────────────────────────────────────────
 const C = {
@@ -59,48 +71,23 @@ const HowToApply = () => {
 
   return (
     <div>
-      {/* ══ HERO BANNER ──────────────────────────────────────────────────── */}
-      <div
-        className="relative w-full flex items-center justify-center overflow-hidden"
-        style={{ minHeight: 340 }}
-      >
-        <img
-          src={bgImage}
-          alt="AMESCO Campus"
-          className="absolute inset-0 w-full h-full object-cover"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "rgba(10,8,80,.68)" }}
-        />
-        <div className="relative z-10 text-center px-6 py-16">
-          <h1
-            className="font-['Playfair_Display'] font-black text-white mb-4"
-            style={{ fontSize: "clamp(38px, 6vw, 64px)" }}
-          >
-            How to Apply
-          </h1>
-          <div className="flex flex-col justify-center mb-5">
-            <div
-              className="w-[70%] h-px mx-auto hidden lg:flex"
-              style={{ background: "rgba(255,255,255,.3)" }}
-            />
-            <div className="w-16 h-0.5 mx-auto rounded-2xl bg-white" />
-          </div>
-          <p className="text-white text-[15px] mb-6 max-w-[600px] mx-auto">
-            Join the prestigious Armed Forces Senior High School. Follow our
-            simple application process to secure your place at AMESCO.
-          </p>
-        </div>
-      </div>
+      <AcademicHero
+        image={bgImage}
+        title="How to Apply"
+        subtitle="Join the prestigious Armed Forces Senior High School. Follow our simple application process to secure your place at AMESCO."
+      />
 
       {/* ══ GET YOUR ADMISSION PROCESS ────────────────────────────────────── */}
       <section className="py-16" style={{ background: C.white }}>
         <div className="max-w-[1220px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Text content */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
               <div className="flex items-center gap-3 mb-4">
                 <span
                   className="text-[12px] font-bold uppercase tracking-[2px]"
@@ -167,10 +154,16 @@ const HowToApply = () => {
                   View Steps ↓
                 </a>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right side - Image */}
-            <div className="relative">
+            <motion.div
+              initial={{ opacity: 0, x: 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="relative"
+            >
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={gallery1}
@@ -208,7 +201,7 @@ const HowToApply = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -256,10 +249,18 @@ const HowToApply = () => {
 
             {/* Right side - Steps list */}
             <div className="w-full lg:w-3/5">
-              <div className="space-y-4">
+              <motion.div
+                variants={stagger}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.15 }}
+                className="space-y-4"
+              >
                 {applicationSteps.map((step, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    variants={fadeUp}
+                    whileHover={{ y: -4 }}
                     className="bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:border-l-4 hover:border-[#E63946]"
                     style={{
                       boxShadow: "0 2px 12px rgba(0,0,0,.06)",
@@ -292,12 +293,16 @@ const HowToApply = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
               {/* Additional Info Box */}
-              <div
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.3 }}
                 className="mt-8 rounded-2xl p-6 flex items-start gap-4 transition-all duration-300 hover:shadow-lg"
                 style={{
                   background: "rgba(230, 57, 70, 0.05)",
@@ -326,12 +331,16 @@ const HowToApply = () => {
                     </a>
                   </p>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* ══ CTA Section ────────────────────────────────────────────────── */}
-          <div
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
             className="mt-16 rounded-3xl p-10 text-center relative overflow-hidden"
             style={{
               background: "linear-gradient(145deg, #0a0a5c 0%, #1a1a7a 100%)",
@@ -381,7 +390,7 @@ const HowToApply = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* ══ Important Dates ───────────────────────────────────────────── */}
           <div
@@ -394,7 +403,13 @@ const HowToApply = () => {
             >
               📅 Key Dates for 2026 Admission
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
               {[
                 { date: "January 15", event: "Application Forms Available" },
                 { date: "March 31", event: "Application Deadline" },
@@ -405,8 +420,10 @@ const HowToApply = () => {
                 { date: "August 15", event: "Orientation Day" },
                 { date: "September 1", event: "Academic Year Begins" },
               ].map((item, i) => (
-                <div
+                <motion.div
                   key={i}
+                  variants={fadeUp}
+                  whileHover={{ y: -4 }}
                   className="text-center p-4 rounded-xl bg-gray-50 hover:bg-white transition-all duration-300 hover:shadow-md"
                 >
                   <p
@@ -418,9 +435,9 @@ const HowToApply = () => {
                   <p className="text-[13px]" style={{ color: C.bodyText }}>
                     {item.event}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

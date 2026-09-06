@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import bgImage from "/src/assets/slider1.jpeg";
 import { Link } from "react-router-dom";
+import AcademicHero from "../../../component/common/AcademicHero";
 
 // ─── Color tokens ─────────────────────────────────────────────────────────────
 const C = {
@@ -331,34 +333,11 @@ const ApplyNow = () => {
 
   return (
     <div>
-      {/* ══ HERO BANNER ──────────────────────────────────────────────────── */}
-      <div
-        className="relative w-full flex items-center justify-center overflow-hidden"
-        style={{ minHeight: 280 }}
-      >
-        <img
-          src={bgImage}
-          alt="AMESCO Campus"
-          className="absolute inset-0 w-full h-full object-cover"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "rgba(10,8,80,.68)" }}
-        />
-        <div className="relative z-10 text-center px-6 py-12">
-          <h1
-            className="font-['Playfair_Display'] font-black text-white mb-3"
-            style={{ fontSize: "clamp(32px, 5vw, 52px)" }}
-          >
-            Apply Now
-          </h1>
-          <div className="w-16 h-0.5 mx-auto rounded-2xl bg-white mb-3" />
-          <p className="text-white text-[14px] max-w-[550px] mx-auto">
-            Complete the application form below to begin your journey at AMESCO.
-          </p>
-        </div>
-      </div>
+      <AcademicHero
+        image={bgImage}
+        title="Apply Now"
+        subtitle="Complete the application form below to begin your journey at AMESCO."
+      />
 
       {/* ══ APPLICATION FORM ────────────────────────────────────────────── */}
       <section className="py-12" style={{ background: C.lightGray }}>
@@ -384,8 +363,9 @@ const ApplyNow = () => {
                       const isCompleted = currentStep > step.number;
 
                       return (
-                        <div
+                        <motion.div
                           key={step.number}
+                          whileHover={{ x: 4 }}
                           className={`flex items-start gap-3 p-3 rounded-xl transition-all duration-300 cursor-pointer
                             ${
                               isActive
@@ -398,7 +378,9 @@ const ApplyNow = () => {
                             !showPreview && setCurrentStep(step.number)
                           }
                         >
-                          <div
+                          <motion.div
+                            animate={{ scale: isActive ? 1.15 : 1 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 16 }}
                             className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0
                             ${
                               isActive
@@ -409,7 +391,7 @@ const ApplyNow = () => {
                             }`}
                           >
                             {isCompleted ? "✓" : step.number}
-                          </div>
+                          </motion.div>
                           <div>
                             <p
                               className={`font-semibold text-sm ${isActive ? "text-[#E63946]" : isCompleted ? "text-green-600" : "text-gray-600"}`}
@@ -420,7 +402,7 @@ const ApplyNow = () => {
                               {step.description}
                             </p>
                           </div>
-                        </div>
+                        </motion.div>
                       );
                     })}
                   </div>
@@ -432,10 +414,11 @@ const ApplyNow = () => {
                       <span>{Math.round((currentStep / 3) * 100)}%</span>
                     </div>
                     <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full transition-all duration-500"
+                      <motion.div
+                        className="h-full rounded-full"
+                        animate={{ width: `${(currentStep / 3) * 100}%` }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
                         style={{
-                          width: `${(currentStep / 3) * 100}%`,
                           background: `linear-gradient(90deg, ${C.accentRed}, ${C.royalBlue})`,
                         }}
                       />
@@ -462,25 +445,31 @@ const ApplyNow = () => {
 
             {/* ─── Right Side: Form ────────────────────────────────────── */}
             <div className="lg:col-span-9">
-              {sent && (
-                <div
-                  className="rounded-xl px-5 py-4 mb-6 flex items-center gap-3"
-                  style={{
-                    background: "rgba(46, 213, 115, 0.1)",
-                    border: "1px solid rgba(46, 213, 115, 0.3)",
-                  }}
-                >
-                  <span style={{ color: C.success, fontSize: 24 }}>✓</span>
-                  <div>
-                    <p className="text-[14px] font-semibold text-gray-800">
-                      Application submitted successfully!
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      We'll contact you within 24 hours at {form.email}
-                    </p>
-                  </div>
-                </div>
-              )}
+              <AnimatePresence>
+                {sent && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -12, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: "auto" }}
+                    exit={{ opacity: 0, y: -12, height: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="rounded-xl px-5 py-4 mb-6 flex items-center gap-3"
+                    style={{
+                      background: "rgba(46, 213, 115, 0.1)",
+                      border: "1px solid rgba(46, 213, 115, 0.3)",
+                    }}
+                  >
+                    <span style={{ color: C.success, fontSize: 24 }}>✓</span>
+                    <div>
+                      <p className="text-[14px] font-semibold text-gray-800">
+                        Application submitted successfully!
+                      </p>
+                      <p className="text-gray-600 text-sm">
+                        We'll contact you within 24 hours at {form.email}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* ─── Form Container ─── White Background ────────────── */}
               <div
@@ -514,6 +503,14 @@ const ApplyNow = () => {
                   </p>
 
                   <form onSubmit={handleSubmit}>
+                    <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentStep}
+                      initial={{ opacity: 0, x: 24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -24 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
                     {/* ─── Step 1: Personal Information ───────────────── */}
                     {currentStep === 1 && (
                       <div className="space-y-4">
@@ -1030,6 +1027,8 @@ const ApplyNow = () => {
                         </div>
                       </div>
                     )}
+                    </motion.div>
+                    </AnimatePresence>
 
                     {/* ─── Navigation Buttons ──────────────────────────── */}
                     {!showPreview && !sent && (
@@ -1076,8 +1075,15 @@ const ApplyNow = () => {
                   </form>
 
                   {/* ─── Preview Mode ──────────────────────────────────── */}
+                  <AnimatePresence>
                   {showPreview && !sent && (
-                    <div className="mt-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -16 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-6"
+                    >
                       <ApplicationPreview />
 
                       <div className="flex flex-col sm:flex-row gap-4 mt-6">
@@ -1118,8 +1124,9 @@ const ApplyNow = () => {
                           )}
                         </button>
                       </div>
-                    </div>
+                    </motion.div>
                   )}
+                  </AnimatePresence>
                 </div>
               </div>
 
