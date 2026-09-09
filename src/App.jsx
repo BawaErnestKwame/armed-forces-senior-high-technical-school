@@ -8,7 +8,7 @@ import Home from "./component/Home"
 import Contact from "./Pages/Contact/component/Contact"
 import AboutUs from './Pages/About/AboutUs';
 import Leaders from './Pages/About/Leaders';
-import HowToApply from "./Pages/Admissions/howToapply/HowToApply";
+import HowToApply from "./Pages/admissions/howToapply/HowToApply";
 import ApplyNow from "./Pages/admissions/applyNow/ApplyNow";
 import SignIn from './auth/SignIn';
 import Evoucher from './Pages/pincode/Evoucher';
