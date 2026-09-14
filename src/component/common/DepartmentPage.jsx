@@ -10,7 +10,6 @@ const C = {
   accentRedDark: "#c1121f",
   royalBlueDark: "#261481",
   royalBlue: "#0e07dd",
-  maroon: "#7A0C2E",
 };
 
 const fadeUp = {
@@ -120,11 +119,11 @@ const FacilityCard = ({ title, desc, img }) => (
   </motion.div>
 );
 
-// ── Sticky segmented tab bar — Overview / Curriculum / Program Professors ──
+// ── Sticky segmented tab bar — Overview / Curriculum / Course Teachers ──
 const TABS = [
   { id: "overview", label: "Overview" },
   { id: "curriculum", label: "Curriculum" },
-  { id: "professors", label: "Program Professors" },
+  { id: "professors", label: "Course Teachers" },
 ];
 
 const TabBar = ({ active, onChange }) => (
@@ -142,7 +141,7 @@ const TabBar = ({ active, onChange }) => (
               <motion.div
                 layoutId="dept-tab-highlight"
                 className="absolute inset-0"
-                style={{ background: C.maroon }}
+                style={{ background: C.accentRed }}
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />
             )}
@@ -228,7 +227,7 @@ const DepartmentPage = ({
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.3 }}
             >
-              <SectionHeading eyebrow="Our Faculty" title="Program Professors" />
+              <SectionHeading eyebrow="Our Faculty" title="Course Teachers" />
               <motion.div
                 variants={stagger}
                 initial="hidden"

@@ -204,7 +204,7 @@ const Teachers = () => {
             className="text-[12px] font-extrabold tracking-[2px] uppercase"
             style={{ color: C.accentRed }}
           >
-            Our Teachers
+            Our Leadership
           </span>
         </div>
 
@@ -212,7 +212,7 @@ const Teachers = () => {
           className="font-['Playfair_Display'] font-black leading-[1.05] mb-6"
           style={{ fontSize: "clamp(28px,3.4vw,38px)", color: C.navy }}
         >
-          Leadership
+          Administration
         </h2>
 
         {/* Slider viewport */}

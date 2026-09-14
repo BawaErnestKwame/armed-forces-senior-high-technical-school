@@ -9,7 +9,7 @@ const NAV_LINKS = [
     to: "/about",
     children: [
       { label: "About Us", to: "/about" },
-      { label: "Leaders", to: "/about/leaders" },
+      { label: "Leadership", to: "/about/leaders" },
     ],
   },
   {

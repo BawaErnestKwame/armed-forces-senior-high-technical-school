@@ -11,12 +11,32 @@ import {
   Quote,
 } from "lucide-react";
 import banner from "../../assets/banner.jpg";
+import gallery1 from "../../assets/gallery/gallery1.jpg";
+import gallery2 from "../../assets/gallery/gallery2.jpg";
+import gallery3 from "../../assets/gallery/gallery3.jpg";
+import gallery4 from "../../assets/gallery/gallery4.jpg";
+import gallery6 from "../../assets/gallery/gallery6.jpg";
+import gallery8 from "../../assets/gallery/gallery8.jpg";
+import gallery11 from "../../assets/gallery/gallery11.jpg";
 
 const NAV_ITEMS = [
   { id: "who-we-are", label: "Who We Are" },
-  { id: "history", label: "History" },
+  { id: "alumni", label: "Our Alumni" },
   { id: "administration", label: "Administration" },
-  { id: "campus-map", label: "Campus Map" },
+  { id: "tour-campus", label: "Tour Our Campus" },
+];
+
+// Spots shown in the "Tour Our Campus" photo grid — swap images for real
+// campus photos as they become available.
+const CAMPUS_TOUR = [
+  { name: "School Field", img: gallery2 },
+  { name: "Music Room", img: gallery6 },
+  { name: "Library", img: gallery8 },
+  { name: "Dining Hall", img: gallery4 },
+  { name: "Headmaster's Office", img: banner },
+  { name: "ICT Laboratory", img: gallery3 },
+  { name: "Technical Workshop", img: gallery11 },
+  { name: "Assembly Hall", img: gallery1 },
 ];
 
 // Placeholder content per tab — replace copy/images as they're ready
@@ -32,14 +52,15 @@ const TAB_CONTENT = {
       "Our diverse community welcomes students from across the globe, fostering cultural exchange and mutual understanding. Through international collaborations, research initiatives, and innovation hubs, we provide opportunities for students to engage with global challenges and contribute to sustainable solutions. At the heart of AMESCO lies a commitment to excellence and inclusivity — gaining the skills, confidence, and perspective to lead in an ever-changing world.",
     images: [banner, banner], // TODO: swap second slot for a distinct image later
   },
-  history: {
-    heading: "Our History",
+  alumni: {
+    heading: "Our Alumni Network",
     intro:
-      "Placeholder history content — add AMESCO founding story and milestones here.",
+      "AMESCO alumni go on to lead in every sector — the Ghana Armed Forces, business, academia, technical trades, and public service. Our graduates carry the discipline, technical skill, and character built here into their careers, and many return to mentor current students, offer internships, and support school projects.",
     quote:
-      "Placeholder quote about the school's legacy and growth over the years.",
-    quoteAuthor: "Kathryn Murphy",
-    closing: "Placeholder closing paragraph for the history section.",
+      "AMESCO gave me the foundation I needed to succeed. The community, the facilities, and the mentorship were unmatched.",
+    quoteAuthor: "Kwame Boateng, Alumnus",
+    closing:
+      "Whether serving in uniform, running their own businesses, or advancing in technical and vocational fields, our alumni remain part of the AMESCO family — connected through reunions, mentorship programmes, and an active alumni association.",
     images: [banner, banner],
   },
   administration: {
@@ -49,15 +70,6 @@ const TAB_CONTENT = {
     quote: "Placeholder quote from a member of the administration.",
     quoteAuthor: "Kathryn Murphy",
     closing: "Placeholder closing paragraph for the administration section.",
-    images: [banner, banner],
-  },
-  "campus-map": {
-    heading: "Campus Map",
-    intro:
-      "Placeholder content describing the campus layout and key buildings.",
-    quote: "Placeholder quote about navigating or exploring the campus.",
-    quoteAuthor: "Kathryn Murphy",
-    closing: "Placeholder closing paragraph for the campus map section.",
     images: [banner, banner],
   },
 };
@@ -423,41 +435,73 @@ const AboutUs = () => {
 
         {/* ── Main content ── */}
         <div>
-          <h2 className="font-['Playfair_Display'] text-4xl font-black text-gray-900 mb-4">
-            {content.heading}
-          </h2>
-          <p className="text-gray-500 leading-relaxed text-sm mb-8">
-            {content.intro}
-          </p>
+          {activeTab === "tour-campus" ? (
+            <>
+              <h2 className="font-['Playfair_Display'] text-4xl font-black text-gray-900 mb-4">
+                Tour Our Campus
+              </h2>
+              <p className="text-gray-500 leading-relaxed text-sm mb-10">
+                Take a walk through AMESCO's facilities — from the classrooms
+                and labs to the spaces where students learn, play, and grow.
+              </p>
 
-          {/* Quote card */}
-          <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
-            <span className="font-['Playfair_Display'] text-5xl text-gray-900 leading-none block mb-2">
-              ''
-            </span>
-            <p className="italic text-gray-800 text-sm leading-relaxed mb-4">
-              "{content.quote}"
-            </p>
-            <p className="font-semibold text-gray-900">
-              - {content.quoteAuthor}
-            </p>
-          </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {CAMPUS_TOUR.map((spot) => (
+                  <div
+                    key={spot.name}
+                    className="bg-white rounded-xl shadow-sm overflow-hidden"
+                  >
+                    <img
+                      src={spot.img}
+                      alt={spot.name}
+                      className="w-full h-48 object-cover"
+                    />
+                    <p className="text-center font-semibold text-gray-900 py-3 text-sm">
+                      {spot.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className="font-['Playfair_Display'] text-4xl font-black text-gray-900 mb-4">
+                {content.heading}
+              </h2>
+              <p className="text-gray-500 leading-relaxed text-sm mb-8">
+                {content.intro}
+              </p>
 
-          <p className="text-gray-500 text-sm leading-relaxed mb-10">
-            {content.closing}
-          </p>
+              {/* Quote card */}
+              <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
+                <span className="font-['Playfair_Display'] text-5xl text-gray-900 leading-none block mb-2">
+                  ''
+                </span>
+                <p className="italic text-gray-800 text-sm leading-relaxed mb-4">
+                  "{content.quote}"
+                </p>
+                <p className="font-semibold text-gray-900">
+                  - {content.quoteAuthor}
+                </p>
+              </div>
 
-          {/* Image grid with overlapping seal */}
-          <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {content.images.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`${content.heading} ${i}`}
-                className="w-full h-64 object-cover rounded-lg"
-              />
-            ))}
-          </div>
+              <p className="text-gray-500 text-sm leading-relaxed mb-10">
+                {content.closing}
+              </p>
+
+              {/* Image grid with overlapping seal */}
+              <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {content.images.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt={`${content.heading} ${i}`}
+                    className="w-full h-64 object-cover rounded-lg"
+                  />
+                ))}
+              </div>
+            </>
+          )}
 
           {/* ══ STATS BANNER ─────────────────────────────────────────────── */}
           <div

@@ -19,6 +19,12 @@ import Science from './Pages/academics/science/Science';
 import Technical from './Pages/academics/technical/Technical';
 import HomeEconomics from './Pages/academics/home-economics/HomeEconomics';
 import VisualArt from './Pages/academics/visualArt/VisualArt';
+import Events from './Pages/news/events/Events';
+import EventDetail from './Pages/news/events/EventDetail';
+import NoticeBoard from './Pages/news/notices/NoticeBoard';
+import NoticeDetail from './Pages/news/notices/NoticeDetail';
+import SchooLife from './Pages/schoolife/SchooLife';
+import Gallery from './Pages/gallery/Gallery';
 
 
 
@@ -56,6 +62,18 @@ const App = () => {
          <Route path="/academics/general-science" element={<Science/> }/>
          <Route path="/academics/technical/technical" element={<Technical/> }/>
          <Route path="/academics/home-economics/homeEconomics" element={<HomeEconomics/> }/>
+
+         {/* News & Events */}
+         <Route path="/news/events" element={<Events />} />
+         <Route path="/news/events/:id" element={<EventDetail />} />
+         <Route path="/news/notices" element={<NoticeBoard />} />
+         <Route path="/news/notices/:id" element={<NoticeDetail />} />
+
+         {/* School Life */}
+         <Route path="/school-life" element={<SchooLife />} />
+
+         {/* Gallery */}
+         <Route path="/gallery" element={<Gallery />} />
 
        </Routes>
        {!hide && <Footer />}

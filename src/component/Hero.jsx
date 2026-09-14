@@ -12,7 +12,7 @@ const SLIDES = [
     line1: "Service With",
     line2: "Humility",
     sub: "Armed Forces Senior High Technical School, Kumasi — shaping disciplined, brilliant minds since 1991.",
-    cta: { label: "Join Our School", to: "/admissions/apply" },
+    cta: { label: "Join Our School", to: "/admissions/applyNow/applyNow" },
     ctaSecondary: { label: "Explore Programmes", to: "/academics" },
   },
   {
@@ -22,7 +22,7 @@ const SLIDES = [
     line2: "Education",
     sub: "From General Science to Technical programmes — find your calling and unlock your full potential.",
     cta: { label: "View Academics", to: "/academics" },
-    ctaSecondary: { label: "Apply Now", to: "/admissions/apply" },
+    ctaSecondary: { label: "Apply Now", to: "/admissions/applyNow/applyNow" },
   },
   {
     id: 3,
