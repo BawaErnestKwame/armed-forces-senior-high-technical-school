@@ -80,7 +80,7 @@ const Leaders = () => {
         />
         <div className="relative z-10 text-center px-6 py-16">
           <h1
-            className="font-['Playfair_Display'] font-black text-white mb-4"
+            className="font-heading font-bold text-white mb-4"
             style={{ fontSize: "clamp(38px, 6vw, 64px)" }}
           >
             Our Leaders
@@ -100,15 +100,15 @@ const Leaders = () => {
       </div>
 
       {/* ══ LEADERS SECTION (sidebar + content) ─────────────────────────── */}
-      <section className="mx-auto px-8 bg-gray-100 lg:px-44 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-10 items-start">
+      <section className="mx-auto px-6 sm:px-8 lg:px-12 xl:px-32 bg-gray-100 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] gap-10 items-start">
         {/* ── Sidebar nav (sticky on scroll) ── */}
-        <aside className="bg-white rounded-xl shadow-sm p-6 h-fit sticky top-6 self-start">
-          <h2 className="font-['Playfair_Display'] text-xl font-bold text-gray-900 mb-2">
+        <aside className="bg-white rounded-xl shadow-sm p-6 h-fit lg:sticky lg:top-6 self-start">
+          <h2 className="font-heading text-xl font-bold text-gray-900 mb-2">
             AMESCO Inside
           </h2>
           <div className="w-10 h-0.5 bg-gray-900 mb-5" />
 
-          <nav className="flex flex-col gap-3">
+          <nav className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-col gap-3">
             {CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat.id;
               return (
@@ -131,13 +131,13 @@ const Leaders = () => {
           <img
             src={banner}
             alt="AMESCO Campus Building"
-            className="w-full h-40 object-cover rounded-md mt-5"
+            className="hidden lg:block w-full h-40 object-cover rounded-md mt-5"
           />
         </aside>
 
         {/* ── Staff grid ── */}
         <div>
-          <h2 className="font-['Playfair_Display'] text-4xl font-black text-gray-900 mb-8">
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
             {CATEGORIES.find((c) => c.id === activeCategory)?.label}
           </h2>
 
@@ -150,7 +150,7 @@ const Leaders = () => {
               initial="hidden"
               animate="show"
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6"
             >
               {staff.map((person) => (
                 <motion.div
@@ -164,7 +164,7 @@ const Leaders = () => {
                     className="w-full h-56 object-cover"
                   />
                   <div className="p-5">
-                    <h3 className="font-['Playfair_Display'] text-lg font-bold text-gray-900 mb-1">
+                    <h3 className="font-heading text-lg font-bold text-gray-900 mb-1">
                       {person.name}
                     </h3>
                     <p className="text-gray-500 text-sm">{person.title}</p>

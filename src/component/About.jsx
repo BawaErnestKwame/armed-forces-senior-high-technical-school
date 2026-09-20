@@ -179,7 +179,7 @@ const About = () => {
 
             {/* Heading */}
             <h2
-              className=" text-3xl   font-black leading-[1]  mb-4"
+              className="font-heading text-3xl   font-bold leading-[1]  mb-4"
               style={{ color: C.royalBlueDark }}
             >
            Mmarima Mma
@@ -271,7 +271,7 @@ const About = () => {
                 <IcoBuilding/>
                 <div className="leading-none">
                   <div
-                    className="font-['Playfair_Display'] text-[42px] font-black leading-none"
+                    className="font-heading text-[42px] font-bold leading-none"
                     style={{ color: C.royalBlueDark }}
                   >
                     {count}

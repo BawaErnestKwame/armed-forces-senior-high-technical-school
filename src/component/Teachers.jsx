@@ -111,7 +111,7 @@ const TeacherCard = ({ teacher, width }) => {
       {/* Content below image */}
       <div className="flex flex-col items-center px-4 py-4 relative z-10">
         <h4
-          className="font-['Playfair_Display'] text-[16px] font-black mb-0.5 text-center"
+          className="font-heading text-[16px] font-bold mb-0.5 text-center"
           style={{ color: C.navy }}
         >
           {teacher.name}
@@ -209,7 +209,7 @@ const Teachers = () => {
         </div>
 
         <h2
-          className="font-['Playfair_Display'] font-black leading-[1.05] mb-6"
+          className="font-heading font-bold leading-[1.05] mb-6"
           style={{ fontSize: "clamp(28px,3.4vw,38px)", color: C.navy }}
         >
           Administration

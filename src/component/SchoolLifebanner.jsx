@@ -119,7 +119,7 @@ const SchoolLifeBanner = () => (
 
       {/* Heading */}
       <h2
-        className="relative z-10 text-center font-['Playfair_Display'] font-black text-white
+        className="relative z-10 text-center font-heading font-bold text-white
           leading-tight tracking-wide"
         style={{ fontSize: 'clamp(26px, 4.5vw, 52px)' }}
       >

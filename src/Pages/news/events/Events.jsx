@@ -67,7 +67,7 @@ const EventCard = ({ event }) => (
           <Calendar size={14} />
           {formatDate(event.date)}
         </div>
-        <h3 className="font-['Playfair_Display'] text-lg font-bold text-gray-900 mb-2 leading-snug">
+        <h3 className="font-heading text-lg font-bold text-gray-900 mb-2 leading-snug">
           {event.title}
         </h3>
         <p className="text-gray-500 text-sm leading-relaxed mb-4">

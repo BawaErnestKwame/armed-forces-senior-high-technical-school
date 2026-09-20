@@ -17,7 +17,7 @@ const JuniorIcon = () => (
 
 const LINKS = [
   { label: 'Basic Sciences',  to: '/academics/general-science' },
-  { label: 'Visual Arts',     to: '/academics/visual-arts' },
+  { label: 'Visual Arts',     to: '/academics/visualArts/visualArt' },
   { label: 'Performing Arts', to: '/school-life/clubs' },
 ]
 

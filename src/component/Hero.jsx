@@ -32,7 +32,7 @@ const SLIDES = [
     line2: "Character & Growth",
     sub: "A vibrant campus community that builds resilience, leadership, and a lifelong passion for learning.",
     cta: { label: "Explore School Life", to: "/school-life" },
-    ctaSecondary: { label: "Gallery", to: "/school-life/gallery" },
+    ctaSecondary: { label: "Gallery", to: "/gallery" },
   },
 ];
 

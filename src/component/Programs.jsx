@@ -163,7 +163,7 @@ const Gallery = () => {
               </span>
             </div>
             <h2
-              className="font-['Playfair_Display'] font-black leading-[1.05]"
+              className="font-heading font-bold leading-[1.05]"
               style={{ fontSize: "clamp(32px,4vw,48px)", color: C.navy }}
             >
               Campus Moments

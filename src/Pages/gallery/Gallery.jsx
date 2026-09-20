@@ -146,7 +146,7 @@ const Gallery = () => {
       <section className="mx-auto px-6 lg:px-24 max-w-[1220px] py-16">
         <Reveal className="text-center max-w-[700px] mx-auto mb-12">
           <h2
-            className="font-['Playfair_Display'] text-2xl sm:text-3xl font-black mb-3"
+            className="font-heading text-2xl sm:text-3xl font-bold mb-3"
             style={{ color: C.royalBlueDark }}
           >
             Life at Armed Forces Senior High Technical School, Kumasi

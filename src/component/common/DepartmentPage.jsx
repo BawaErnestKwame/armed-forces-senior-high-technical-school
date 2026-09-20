@@ -45,7 +45,7 @@ const SectionHeading = ({ eyebrow, title }) => (
       {eyebrow}
     </span>
     <h2
-      className="font-['Playfair_Display'] text-3xl sm:text-4xl font-black mt-2"
+      className="font-heading text-3xl sm:text-4xl font-bold mt-2"
       style={{ color: C.royalBlueDark }}
     >
       {title}
@@ -55,7 +55,7 @@ const SectionHeading = ({ eyebrow, title }) => (
 
 const SubjectList = ({ heading, subjects }) => (
   <Reveal className="bg-white rounded-xl shadow-sm p-6 sm:p-8">
-    <h3 className="font-['Playfair_Display'] text-xl font-bold text-gray-900 mb-5">
+    <h3 className="font-heading text-xl font-bold text-gray-900 mb-5">
       {heading}
     </h3>
     <motion.ul
@@ -94,7 +94,7 @@ const ProfessorCard = ({ name, role, photo }) => (
       alt={name}
       className="w-24 h-24 rounded-full object-cover mx-auto mb-4"
     />
-    <h4 className="font-['Playfair_Display'] text-lg font-bold text-gray-900">
+    <h4 className="font-heading text-lg font-bold text-gray-900">
       {name}
     </h4>
     <p className="text-sm font-semibold mt-1" style={{ color: C.accentRed }}>
@@ -111,7 +111,7 @@ const FacilityCard = ({ title, desc, img }) => (
   >
     <img src={img} alt={title} className="w-full h-40 object-cover" />
     <div className="p-6 text-center">
-      <h4 className="font-['Playfair_Display'] text-lg font-bold text-gray-900 mb-2">
+      <h4 className="font-heading text-lg font-bold text-gray-900 mb-2">
         {title}
       </h4>
       <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
@@ -302,7 +302,7 @@ const DepartmentPage = ({
             background: `linear-gradient(135deg, ${C.royalBlueDark}, ${C.royalBlue})`,
           }}
         >
-          <h2 className="font-['Playfair_Display'] text-3xl sm:text-4xl font-black text-white mb-3">
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mb-3">
             Ready to Join {title}?
           </h2>
           <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto mb-8">

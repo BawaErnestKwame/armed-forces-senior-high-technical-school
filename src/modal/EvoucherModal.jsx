@@ -1,301 +1,256 @@
 // EvoucherModal.jsx
-import React, { useState } from "react";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Ticket, Smartphone, CreditCard, CheckCircle2 } from "lucide-react";
+import ModalShell from "./ModalShell";
+
+const PRICE = "GHC 180";
+
+const METHODS = [
+  {
+    id: "mobile-money",
+    icon: Smartphone,
+    title: "Mobile Money",
+    text: "Pay with MTN, Vodafone, or Airtel Money",
+  },
+  {
+    id: "card",
+    icon: CreditCard,
+    title: "Credit/Debit Card",
+    text: "Pay with Visa, Mastercard, or local cards",
+  },
+];
+
+const INITIAL = { fullName: "", email: "", phone: "", paymentMethod: "mobile-money" };
+
+const inputCls =
+  "w-full px-4 py-3 rounded-xl text-[14px] text-gray-800 bg-white border-2 border-[#e5e7ef] hover:border-[#261481]/30 focus:border-[#261481] focus:ring-4 focus:ring-[#261481]/10 transition-all outline-none placeholder:text-gray-400";
+
+const labelCls =
+  "block text-[11px] font-bold uppercase tracking-[1px] mb-2 text-[#261481]";
 
 const EvoucherModal = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    paymentMethod: "mobile-money",
-  });
-  const [step, setStep] = useState(1); 
+  const [formData, setFormData] = useState(INITIAL);
+  const [step, setStep] = useState(1);
+  const timers = useRef([]);
+
+  const clearTimers = () => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+  };
+  useEffect(() => clearTimers, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePaymentMethodChange = (method) => {
-    setFormData((prev) => ({ ...prev, paymentMethod: method }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setStep(2);
     // Simulate payment processing
-    setTimeout(() => {
-      setStep(3);
-    }, 3000);
+    timers.current.push(setTimeout(() => setStep(3), 3000));
   };
 
   const closeModal = () => {
+    clearTimers();
     onClose();
-    // Reset after animation
-    setTimeout(() => {
-      setStep(1);
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        paymentMethod: "mobile-money",
-      });
-    }, 300);
+    // Reset after the exit animation
+    timers.current.push(
+      setTimeout(() => {
+        setStep(1);
+        setFormData(INITIAL);
+      }, 300),
+    );
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 animate-fadeIn">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={closeModal}
-      />
-
-      {/* Modal Content */}
-      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-slideUp">
-        {/* Close Button */}
-        <button
-          onClick={closeModal}
-          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
-        >
-          <CloseIcon sx={{ fontSize: "24px", color: "#6b7280" }} />
-        </button>
-
-        {/* ═══ Step 1: Purchase Form ═══ */}
-        {step === 1 && (
-          <div className="p-6 md:p-8">
-            <div className="text-center mb-8">
-              <div className="inline-block  p-3 rounded-2xl mb-4">
-                <InventoryIcon sx={{ fontSize: "32px", color: "#0e07dd" }} />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-800">
-                Purchase Application eVoucher
-              </h2>
-              <p className="text-sm text-gray-500 mt-2 max-w-md mx-auto">
-                Enter your eVoucher details to proceed with the application
-                purchase.
-              </p>
-              <div className="mt-4 inline-block bg-amber-50 px-6 py-2 rounded-full border-2 border-amber-200">
-                <span className="text-2xl font-bold text-amber-700">
-                  GHC 180
-                </span>
-              </div>
+    <ModalShell isOpen={isOpen} onClose={closeModal}>
+      {/* ═══ Step 1: Purchase Form ═══ */}
+      {step === 1 && (
+        <div className="p-6 md:p-8">
+          <div className="text-center mb-7">
+            <div className="w-14 h-14 mx-auto rounded-2xl bg-[#261481]/10 flex items-center justify-center mb-4">
+              <Ticket size={28} className="text-[#261481]" />
             </div>
+            <h2 className="font-heading text-2xl font-bold text-[#261481]">
+              Purchase Application eVoucher
+            </h2>
+            <div className="w-12 h-0.5 rounded-full bg-[#E63946] mx-auto mt-3 mb-3" />
+            <p className="text-sm text-gray-500 max-w-md mx-auto">
+              Enter your eVoucher details to proceed with the application
+              purchase.
+            </p>
+            <div className="mt-4 inline-block bg-[#E63946]/10 px-6 py-2 rounded-full border-2 border-[#E63946]/25">
+              <span className="text-2xl font-bold text-[#E63946]">{PRICE}</span>
+            </div>
+          </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Personal Information */}
-              <div className="border-t border-gray-100 pt-6">
-                <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
-                  Personal Information
-                </h3>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Personal Information */}
+            <div className="border-t border-[#e5e7ef] pt-6 space-y-4">
+              <h3 className="text-[13px] font-bold text-[#261481] uppercase tracking-[1.5px]">
+                Personal Information
+              </h3>
 
-                {/* Full Name */}
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your full name"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all outline-none"
-                  />
-                </div>
-
-                {/* Email Address */}
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email address"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all outline-none"
-                  />
-                </div>
-
-                {/* Phone Number */}
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="Enter your phone number"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Payment Method */}
-              <div className="border-t border-gray-100 pt-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Payment Method <span className="text-red-500">*</span>
+              <div>
+                <label htmlFor="fullName" className={labelCls}>
+                  Full Name <span className="text-[#E63946]">*</span>
                 </label>
-
-                <div className="space-y-3">
-                  {/* Mobile Money */}
-                  <div
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                      formData.paymentMethod === "mobile-money"
-                        ? "border-amber-500 bg-amber-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => handlePaymentMethodChange("mobile-money")}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="bg-green-100 p-2 rounded-lg">
-                          <PhoneIphoneIcon
-                            sx={{ fontSize: "20px", color: "#16a34a" }}
-                          />
-                        </div>
-                        <div>
-                          <p className="font-semibold text-gray-800">
-                            Mobile Money
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            Pay with MTN, Vodafone, or Airtel Money
-                          </p>
-                        </div>
-                      </div>
-                      {formData.paymentMethod === "mobile-money" && (
-                        <CheckCircleIcon sx={{ color: "#b45309" }} />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Credit/Debit Card */}
-                  <div
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                      formData.paymentMethod === "card"
-                        ? "border-amber-500 bg-amber-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => handlePaymentMethodChange("card")}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="bg-blue-100 p-2 rounded-lg">
-                          <CreditCardIcon
-                            sx={{ fontSize: "20px", color: "#2563eb" }}
-                          />
-                        </div>
-                        <div>
-                          <p className="font-semibold text-gray-800">
-                            Credit/Debit Card
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            Pay with Visa, Mastercard, or local cards
-                          </p>
-                        </div>
-                      </div>
-                      {formData.paymentMethod === "card" && (
-                        <CheckCircleIcon sx={{ color: "#b45309" }} />
-                      )}
-                    </div>
-                  </div>
-                </div>
+                <input
+                  id="fullName"
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  placeholder="Enter your full name"
+                  required
+                  className={inputCls}
+                />
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full py-3 rounded-xl text-white font-bold text-sm transition-all duration-300 
-                  hover:-translate-y-0.5 hover:shadow-2xl bg-[#E63946]"
-              >
-                Pay Now - GHC 180.00
-              </button>
-            </form>
-          </div>
-        )}
+              <div>
+                <label htmlFor="email" className={labelCls}>
+                  Email Address <span className="text-[#E63946]">*</span>
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="Enter your email address"
+                  required
+                  className={inputCls}
+                />
+              </div>
 
-        {/* ═══ Step 2: Processing ═══ */}
-        {step === 2 && (
-          <div className="p-6 md:p-12 text-center">
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+              <div>
+                <label htmlFor="phone" className={labelCls}>
+                  Phone Number <span className="text-[#E63946]">*</span>
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="Enter your phone number"
+                  required
+                  className={inputCls}
+                />
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
-              Processing Payment...
-            </h3>
-            <p className="text-gray-500">
-              Please wait while we process your payment
-            </p>
-          </div>
-        )}
 
-        {/* ═══ Step 3: Success ═══ */}
-        {step === 3 && (
-          <div className="p-6 md:p-12 text-center">
-            <div className="inline-block bg-green-100 p-4 rounded-full mb-6">
-              <CheckCircleIcon sx={{ fontSize: "48px", color: "#16a34a" }} />
+            {/* Payment Method */}
+            <div className="border-t border-[#e5e7ef] pt-6">
+              <p className={`${labelCls} mb-3`}>
+                Payment Method <span className="text-[#E63946]">*</span>
+              </p>
+
+              <div role="radiogroup" className="space-y-3">
+                {METHODS.map(({ id, icon: Icon, title, text }) => {
+                  const selected = formData.paymentMethod === id;
+                  return (
+                    <motion.button
+                      key={id}
+                      type="button"
+                      role="radio"
+                      aria-checked={selected}
+                      whileHover={{ x: 3 }}
+                      onClick={() =>
+                        setFormData((prev) => ({ ...prev, paymentMethod: id }))
+                      }
+                      className={`w-full text-left p-4 rounded-xl border-2 transition-colors flex items-center gap-3 ${
+                        selected
+                          ? "border-[#E63946] bg-[#E63946]/5"
+                          : "border-[#e5e7ef] hover:border-[#261481]/30"
+                      }`}
+                    >
+                      <span className="w-10 h-10 rounded-lg bg-[#261481]/10 flex items-center justify-center shrink-0">
+                        <Icon size={20} className="text-[#261481]" />
+                      </span>
+                      <span className="flex-1 min-w-0">
+                        <span className="block font-semibold text-[#261481]">
+                          {title}
+                        </span>
+                        <span className="block text-xs text-gray-500">
+                          {text}
+                        </span>
+                      </span>
+                      {selected && (
+                        <CheckCircle2
+                          size={22}
+                          className="text-[#E63946] shrink-0"
+                        />
+                      )}
+                    </motion.button>
+                  );
+                })}
+              </div>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">
-              Payment Successful!
-            </h3>
-            <p className="text-gray-500 mb-2">
-              Your eVoucher has been sent to your email and phone.
-            </p>
-            <p className="text-sm text-gray-400">
-              Order ID:{" "}
-              <span className="font-mono font-semibold">#EV-2024-7890</span>
-            </p>
+
             <button
-              onClick={closeModal}
-              className="mt-6 px-8 py-3 rounded-xl text-white font-bold text-sm transition-all duration-300 
-                hover:-translate-y-0.5 hover:shadow-2xl bg-gradient-to-r from-green-600 to-green-700"
+              type="submit"
+              className="w-full py-3.5 rounded-full text-white font-bold text-sm bg-[#E63946] hover:bg-[#c1121f] transition-all duration-300 hover:-translate-y-0.5"
+              style={{ boxShadow: "0 8px 25px rgba(230,57,70,.35)" }}
             >
-              Done
+              Pay Now - {PRICE}.00
             </button>
-          </div>
-        )}
-      </div>
+          </form>
+        </div>
+      )}
 
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-        .animate-slideUp {
-          animation: slideUp 0.3s ease-out;
-        }
-      `}</style>
-    </div>
+      {/* ═══ Step 2: Processing ═══ */}
+      {step === 2 && (
+        <div className="p-8 md:p-12 text-center">
+          <div className="flex justify-center mb-6">
+            <div className="w-20 h-20 border-4 border-[#e5e7ef] border-t-[#E63946] rounded-full animate-spin" />
+          </div>
+          <h3 className="font-heading text-xl font-bold text-[#261481] mb-2">
+            Processing Payment...
+          </h3>
+          <p className="text-gray-500">
+            Please wait while we process your payment
+          </p>
+        </div>
+      )}
+
+      {/* ═══ Step 3: Success ═══ */}
+      {step === 3 && (
+        <div className="p-8 md:p-12 text-center">
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 16 }}
+            className="inline-flex p-4 rounded-full mb-6"
+            style={{ background: "rgba(46,204,113,.12)" }}
+          >
+            <CheckCircle2 size={48} style={{ color: "#2ecc71" }} />
+          </motion.div>
+          <h3 className="font-heading text-2xl font-bold text-[#261481] mb-2">
+            Payment Successful!
+          </h3>
+          <p className="text-gray-500 mb-2">
+            Your eVoucher has been sent to your email and phone.
+          </p>
+          <p className="text-sm text-gray-400">
+            Order ID:{" "}
+            <span className="font-mono font-semibold text-[#261481]">
+              #EV-2024-7890
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={closeModal}
+            className="mt-6 px-10 py-3 rounded-full text-white font-bold text-sm bg-[#261481] hover:bg-[#0a0850] transition-all duration-300 hover:-translate-y-0.5"
+            style={{ boxShadow: "0 8px 25px rgba(38,20,129,.35)" }}
+          >
+            Done
+          </button>
+        </div>
+      )}
+    </ModalShell>
   );
 };
 

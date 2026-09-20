@@ -193,7 +193,7 @@ const Contact = () => {
                   <span className="group-hover:text-white">{card.icon}</span>
                 </motion.div>
                 <h4
-                  className="font-['Playfair_Display'] text-[17px] font-black"
+                  className="font-heading text-[17px] font-bold"
                   style={{ color: C.navy }}
                 >
                   {card.title}
@@ -255,7 +255,7 @@ const Contact = () => {
                 <div className="h-px flex-1 bg-[#E63946]/30" />
               </div>
 
-              <h2 className="font-['Playfair_Display'] text-white text-[32px] font-black mb-2 relative z-10">
+              <h2 className="font-heading text-white text-[32px] font-bold mb-2 relative z-10">
                 Send Us a Message
               </h2>
               <p className="text-[14px] mb-8 text-gray-300 relative z-10">
@@ -472,7 +472,7 @@ const Contact = () => {
                 style={{ boxShadow: "0 4px 24px rgba(0,0,0,.07)" }}
               >
                 <h3
-                  className="font-['Playfair_Display'] text-[24px] font-black mb-5"
+                  className="font-heading text-[24px] font-bold mb-5"
                   style={{ color: C.navy }}
                 >
                   Visit Our Campus

@@ -59,7 +59,7 @@ const NoticeDetail = () => {
               {notice.category}
             </span>
           </div>
-          <h1 className="font-['Playfair_Display'] font-black text-white text-2xl sm:text-4xl leading-tight mb-4">
+          <h1 className="font-heading font-bold text-white text-2xl sm:text-4xl leading-tight mb-4">
             {notice.title}
           </h1>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/75">

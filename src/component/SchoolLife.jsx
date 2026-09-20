@@ -160,7 +160,7 @@ const SchoolLife = () => {
                 }}
               />
               <h3
-                className="font-['Playfair_Display'] text-[22px] font-black"
+                className="font-heading text-[22px] font-bold"
                 style={{ color: C.darkGray }}
               >
                 Notice

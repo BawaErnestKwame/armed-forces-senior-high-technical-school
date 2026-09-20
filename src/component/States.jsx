@@ -51,21 +51,25 @@ const States = () => {
   return (
     <div
       ref={sectionRef}
-      className="w-full px-2 sm:px-4 md:px-6 lg:px-8 h-[90px] sm:h-[130px] md:h-[110px] flex items-center bg-gray-200"
+      className="w-full px-4 sm:px-6 lg:px-8 py-6 md:py-4 flex items-center bg-gray-200"
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-1 sm:gap-2 md:gap-3 max-w-6xl mx-auto w-full">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 md:gap-y-0 max-w-6xl mx-auto w-full">
         {counts.map((count, index) => (
           <div
             key={index}
-            className="relative h-auto flex flex-col items-center justify-center h-[90px] sm:h-[110px] md:h-[100px] text-center transition-all duration-300 hover:-translate-y-1"
+            className="relative flex flex-col items-center justify-center py-1 md:py-3 text-center transition-all duration-300 hover:-translate-y-1"
           >
-            {/* Vertical divider — hidden on last item and on mobile right column */}
+            {/* Vertical divider — between columns: after the left item on mobile, after every item but the last on md+ */}
             {index < counts.length - 1 && (
-              <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gray-300" />
+              <div
+                className={`absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gray-300 ${
+                  index % 2 === 0 ? "" : "hidden md:block"
+                }`}
+              />
             )}
 
-            <div className="text-lg sm:text-xl mb-1">{icons[index]}</div>
-            <h3 className="text-lg sm:text-xl md:text-2xl lg:text-xl font-bold text-[#E63946]">
+            <div className="mb-1">{icons[index]}</div>
+            <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-xl font-bold text-[#E63946]">
               {count.toLocaleString()}+
             </h3>
             <p className="text-xs sm:text-sm font-semibold text-gray-700 mt-0.5">

@@ -1,6 +1,6 @@
 // src/App.jsx
 import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Navbar from './component/common/Navbar'
 import Footer from './component/common/Footer'
 import { ScrollToTop } from './component/common/Footer'
@@ -25,6 +25,13 @@ import NoticeBoard from './Pages/news/notices/NoticeBoard';
 import NoticeDetail from './Pages/news/notices/NoticeDetail';
 import SchooLife from './Pages/schoolife/SchooLife';
 import Gallery from './Pages/gallery/Gallery';
+import Alumni from './Pages/alumni/Alumni';
+import Administration from './Pages/administration/Administration';
+import Academics from './Pages/academics/Academics';
+import SchoolLifeDetail from './Pages/schoolife/SchoolLifeDetail';
+import Terms from './Pages/legal/Terms';
+import Privacy from './Pages/legal/Privacy';
+import NotFound from './Pages/NotFound';
 
 
 
@@ -46,15 +53,19 @@ const App = () => {
          {/* Match Navbar paths exactly */}
          <Route path="/about" element={<AboutUs />} />
          <Route path="/about/leaders" element={<Leaders />} />
+         <Route path="/about/administration" element={<Administration />} />
+         <Route path="/alumni" element={<Alumni />} />
          <Route
            path="/admissions/howToapply/howToApply"
            element={<HowToApply />}
          />
          <Route path="/admissions/applyNow/applyNow" element={<ApplyNow />} />
+         <Route path="/admissions" element={<Navigate to="/admissions/howToapply/howToApply" replace />} />
 
          <Route path="/auth/signIn" element={<SignIn />} />
          <Route path="/pincode/evoucher" element={<Evoucher/> }/>
          {/* Academics — match Navbar paths exactly */}
+         <Route path="/academics" element={<Academics />} />
          <Route path="/academics/agric/agriculture" element={<Agriculture/> }/>
          <Route path="/academics/business/business" element={<Business/> }/>
          <Route path="/academics/visualArts/visualArt" element={<VisualArt/> }/>
@@ -64,6 +75,7 @@ const App = () => {
          <Route path="/academics/home-economics/homeEconomics" element={<HomeEconomics/> }/>
 
          {/* News & Events */}
+         <Route path="/news" element={<Navigate to="/news/events" replace />} />
          <Route path="/news/events" element={<Events />} />
          <Route path="/news/events/:id" element={<EventDetail />} />
          <Route path="/news/notices" element={<NoticeBoard />} />
@@ -71,9 +83,17 @@ const App = () => {
 
          {/* School Life */}
          <Route path="/school-life" element={<SchooLife />} />
+         <Route path="/school-life/:slug" element={<SchoolLifeDetail />} />
 
          {/* Gallery */}
          <Route path="/gallery" element={<Gallery />} />
+
+         {/* Legal */}
+         <Route path="/terms" element={<Terms />} />
+         <Route path="/privacy" element={<Privacy />} />
+
+         {/* 404 */}
+         <Route path="*" element={<NotFound />} />
 
        </Routes>
        {!hide && <Footer />}

@@ -1,6 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { events as EVENTS, isUpcoming } from "../../Pages/news/events/eventsData";
+import sidebarGallery1 from "../../assets/gallery/gallery1.jpg";
+import sidebarGallery2 from "../../assets/gallery/gallery2.jpg";
+import sidebarGallery3 from "../../assets/gallery/gallery3.jpg";
+import sidebarGallery4 from "../../assets/gallery/gallery4.jpg";
+import sidebarGallery5 from "../../assets/gallery/gallery6.jpg";
+import sidebarGallery6 from "../../assets/gallery/gallery7.jpg";
+
+const upcomingEvents = EVENTS.filter(isUpcoming).sort(
+  (a, b) => new Date(a.date) - new Date(b.date)
+);
+const latestEvent = upcomingEvents[0] ?? EVENTS[0];
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
@@ -10,6 +22,8 @@ const NAV_LINKS = [
     children: [
       { label: "About Us", to: "/about" },
       { label: "Leadership", to: "/about/leaders" },
+      { label: "Administration", to: "/about/administration" },
+      { label: "Alumni", to: "/alumni" },
     ],
   },
   {
@@ -38,7 +52,7 @@ const NAV_LINKS = [
     label: "News & Events",
     to: "/news",
     children: [
-      { label: "Latest News", to: "/news" },
+      { label: "Latest Event", to: `/news/events/${latestEvent.id}` },
       { label: "All Events", to: "/news/events" },
       { label: "Notice Board", to: "/news/notices" },
     ],
@@ -55,12 +69,12 @@ const QUICK_LINKS = [
 ];
 
 const GALLERY = [
-  "https://images.unsplash.com/photo-1562774053-701939374585?w=400&q=80",
-  "https://images.unsplash.com/photo-1523054050858-8df90110c9f1?w=400&q=80",
-  "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&q=80",
-  "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80",
-  "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=80",
-  "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&q=80",
+  sidebarGallery1,
+  sidebarGallery2,
+  sidebarGallery3,
+  sidebarGallery4,
+  sidebarGallery5,
+  sidebarGallery6,
 ];
 
 const SOCIALS = [
@@ -564,7 +578,7 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
   <div
     id="amesco-info-panel"
     className={`fixed top-0 right-0 bottom-0 w-[380px] max-w-[92vw] bg-[#c1121f] z-[1000]
-      overflow-y-auto flex flex-col transition-transform duration-[400ms] ease-[cubic-bezier(0.32,0,0,1)]
+      overflow-y-auto flex flex-col transition-transform duration-[650ms] ease-in-out
       ${open ? "translate-x-0" : "translate-x-full"}`}
     aria-hidden={!open}
     role="dialog"
@@ -604,7 +618,7 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
             {/* Reduced from text-[10px] */}
             SCHOOL OF
           </p>
-          <p className="font-['Playfair_Display'] text-xl font-black text-white tracking-wide uppercase leading-none">
+          <p className="font-heading text-xl font-bold text-white tracking-wide uppercase leading-none">
             {" "}
             {/* Reduced from text-[26px] to text-xl */}
             AMESCO
@@ -660,7 +674,7 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
       </div>
       {/* Quick Contact */}
       <div>
-        <h4 className="font-['Playfair_Display'] text-base font-extrabold text-white mb-3">
+        <h4 className="font-heading text-base font-bold text-white mb-3">
           {" "}
           {/* Reduced from text-lg to text-base, mb-4 to mb-3 */}
           Quick Contact:
@@ -724,7 +738,7 @@ const InfoPanel = ({ open, onClose, onImgClick }) => (
       <div className="border-t border-white/15 pt-4">
         {" "}
         {/* Reduced from pt-6 to pt-4 */}
-        <h4 className="font-['Playfair_Display'] text-base font-extrabold text-white mb-3">
+        <h4 className="font-heading text-base font-bold text-white mb-3">
           {" "}
           {/* Reduced from text-lg to text-base, mb-4 to mb-3 */}
           Follow Us:
@@ -998,7 +1012,7 @@ const Navbar = () => {
 
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-[rgba(10,8,80,.45)] z-[999] transition-opacity duration-300
+        className={`fixed inset-0 bg-[rgba(10,8,80,.45)] z-[999] transition-opacity duration-[650ms] ease-in-out
           ${infoOpen || mobNavOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={closeAll}
         aria-hidden="true"
@@ -1016,7 +1030,7 @@ const Navbar = () => {
         className={`lg:hidden fixed top-0 right-0 bottom-0 w-[min(280px,88vw)]
           bg-gradient-to-br from-[#0a0850] to-[#261481] z-[1001]
           overflow-y-auto flex flex-col
-          transition-transform duration-[380ms] ease-[cubic-bezier(0.32,0,0,1)]
+          transition-transform duration-[650ms] ease-in-out
           ${mobNavOpen ? "translate-x-0" : "translate-x-full"}`}
         aria-label="Mobile navigation"
         aria-hidden={!mobNavOpen}
@@ -1063,7 +1077,7 @@ const Navbar = () => {
                 </svg>
               )}
             </div>
-            <p className="font-['Playfair_Display'] text-xs font-black text-white">
+            <p className="font-heading text-xs font-bold text-white">
               {" "}
               {/* Reduced from text-[14px] to text-xs */}
               <span className="text-[#E63946]">Armed Forces</span> SHS
@@ -1128,14 +1142,14 @@ const Navbar = () => {
               {/* Reduced from text-[10px] */}
               School Motto
             </p>
-            <p className="font-['Playfair_Display'] text-xs font-bold text-white mt-0.5">
+            <p className="font-heading text-xs font-bold text-white mt-0.5">
               {" "}
               {/* Reduced from text-sm */}
               "Mmarima Mma" — <span className="text-[#E63946]">Excellence</span>
             </p>
           </div>
           <Link
-            to="/admissions/apply"
+            to="/admissions/applyNow/applyNow"
             onClick={() => setMobNavOpen(false)}
             className="flex items-center justify-center gap-2 w-full bg-[#E63946] text-white
               py-3 rounded-full text-xs font-bold no-underline // Reduced from py-3.5, text-sm to text-xs

@@ -29,17 +29,14 @@ const CAMPUS_LINKS = [
   { label: 'Alumni Network', to: '/alumni' },
   { label: 'School Library', to: '/school-life/library' },
   { label: 'Campus Life',    to: '/school-life/campus' },
-  { label: 'Gallery',        to: '/school-life/gallery' },
-  { label: 'School History', to: '/about/history' },
+  { label: 'Gallery',        to: '/gallery' },
 ]
 
 const USEFUL_LINKS = [
   { label: 'School Divisions',  to: '/about/administration' },
   { label: 'All Programmes',    to: '/academics' },
   { label: 'Campus Events',     to: '/news/events' },
-  { label: 'How to Apply',      to: '/admissions/how-to-apply' },
-  { label: 'Tuition & Fees',    to: '/admissions/fees' },
-  { label: 'Financial Aid',     to: '/admissions/fees' },
+  { label: 'How to Apply',      to: '/admissions/howToapply/howToApply' },
 ]
 
 const SOCIALS = [
@@ -244,7 +241,7 @@ const Footer = () => (
               }
             </div>
             <div>
-              <p className="font-['Playfair_Display'] text-[17px] font-black text-white leading-none">
+              <p className="font-heading text-[17px] font-bold text-white leading-none">
                 <span style={{ color: C.accentRed }}>Armed Forces</span> SHTS
               </p>
               <p className="text-[10px] font-semibold mt-1 tracking-[.8px] uppercase"
@@ -285,7 +282,7 @@ const Footer = () => (
 
         {/* ── Col 2 — Our Campus ── */}
         <div>
-          <h4 className="font-['Playfair_Display'] text-[17px] font-black text-white mb-1 pb-3 relative">
+          <h4 className="font-heading text-[17px] font-bold text-white mb-1 pb-3 relative">
             Our Campus
             <span
               className="absolute bottom-0 left-0 h-0.5 w-9"
@@ -301,7 +298,7 @@ const Footer = () => (
 
         {/* ── Col 3 — Useful Links ── */}
         <div>
-          <h4 className="font-['Playfair_Display'] text-[17px] font-black text-white mb-1 pb-3 relative">
+          <h4 className="font-heading text-[17px] font-bold text-white mb-1 pb-3 relative">
             Useful Links
             <span
               className="absolute bottom-0 left-0 h-0.5 w-9"
@@ -317,7 +314,7 @@ const Footer = () => (
 
         {/* ── Col 4 — Newsletter + Socials ── */}
         <div>
-          <h4 className="font-['Playfair_Display'] text-[17px] font-black text-white mb-1 pb-3 relative">
+          <h4 className="font-heading text-[17px] font-bold text-white mb-1 pb-3 relative">
             Newsletter
             <span
               className="absolute bottom-0 left-0 h-0.5 w-9"

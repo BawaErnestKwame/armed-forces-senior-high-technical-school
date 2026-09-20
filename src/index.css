@@ -1,6 +1,28 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-heading: "Maison Neue", "Figtree", "Plus Jakarta Sans", sans-serif;
+}
+
+@layer base {
+  /* Tailwind v4 no longer gives buttons a pointer cursor by default */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="radio"],
+  summary,
+  input[type="file"]::file-selector-button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+}
 :root {
     --royal-blue: #0e07dd;
     --royal-blue-dark: #03037f;

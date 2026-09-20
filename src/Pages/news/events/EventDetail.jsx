@@ -74,7 +74,7 @@ const EventDetail = () => {
           >
             {event.category}
           </span>
-          <h1 className="font-['Playfair_Display'] font-black text-white text-3xl sm:text-5xl leading-tight max-w-3xl">
+          <h1 className="font-heading font-bold text-white text-3xl sm:text-5xl leading-tight max-w-3xl">
             {event.title}
           </h1>
         </motion.div>
@@ -97,7 +97,7 @@ const EventDetail = () => {
           </Reveal>
 
           <Reveal className="bg-white rounded-xl shadow-sm p-6 h-fit">
-            <h3 className="font-['Playfair_Display'] text-lg font-bold text-gray-900 mb-5">
+            <h3 className="font-heading text-lg font-bold text-gray-900 mb-5">
               Event Details
             </h3>
             <ul className="flex flex-col gap-4 text-sm text-gray-600">
@@ -120,7 +120,7 @@ const EventDetail = () => {
         {related.length > 0 && (
           <div className="mt-20">
             <h2
-              className="font-['Playfair_Display'] text-2xl sm:text-3xl font-black mb-8"
+              className="font-heading text-2xl sm:text-3xl font-bold mb-8"
               style={{ color: C.royalBlueDark }}
             >
               Related Events
@@ -134,7 +134,7 @@ const EventDetail = () => {
                   >
                     <img src={r.image} alt={r.title} className="w-full h-36 object-cover" />
                     <div className="p-4">
-                      <h4 className="font-['Playfair_Display'] font-bold text-sm text-gray-900 leading-snug">
+                      <h4 className="font-heading font-bold text-sm text-gray-900 leading-snug">
                         {r.title}
                       </h4>
                     </div>

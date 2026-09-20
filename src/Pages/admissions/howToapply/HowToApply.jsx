@@ -102,7 +102,7 @@ const HowToApply = () => {
               </div>
 
               <h2
-                className="font-['Playfair_Display'] text-[34px] sm:text-[40px] font-black leading-tight mb-4"
+                className="font-heading text-[34px] sm:text-[40px] font-bold leading-tight mb-4"
                 style={{ color: C.navy }}
               >
                 Your Journey to <br />
@@ -221,7 +221,7 @@ const HowToApply = () => {
               <div className="h-px w-12" style={{ background: C.accentRed }} />
             </div>
             <h2
-              className="font-['Playfair_Display'] text-[36px] sm:text-[42px] font-black"
+              className="font-heading text-[36px] sm:text-[42px] font-bold"
               style={{ color: C.navy }}
             >
               Simple Steps to <span style={{ color: C.accentRed }}>Apply</span>
@@ -278,7 +278,7 @@ const HowToApply = () => {
                       <div className="flex-1 min-w-0">
                         {/* Title */}
                         <h3
-                          className="font-['Playfair_Display'] text-[18px] font-bold mb-1 transition-colors duration-300 group-hover:text-[#E63946]"
+                          className="font-heading text-[18px] font-bold mb-1 transition-colors duration-300 group-hover:text-[#E63946]"
                           style={{ color: C.navy }}
                         >
                           {step.title}
@@ -351,7 +351,7 @@ const HowToApply = () => {
             <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#0e07dd]/10 blur-3xl" />
 
             <div className="relative z-10">
-              <h3 className="font-['Playfair_Display'] text-[28px] sm:text-[34px] font-bold text-white mb-3">
+              <h3 className="font-heading text-[28px] sm:text-[34px] font-bold text-white mb-3">
                 Ready to Apply?
               </h3>
               <p className="text-gray-300 text-[15px] max-w-[550px] mx-auto mb-6">
@@ -398,7 +398,7 @@ const HowToApply = () => {
             style={{ boxShadow: "0 4px 24px rgba(0,0,0,.07)" }}
           >
             <h3
-              className="font-['Playfair_Display'] text-[22px] font-bold mb-6 text-center"
+              className="font-heading text-[22px] font-bold mb-6 text-center"
               style={{ color: C.navy }}
             >
               📅 Key Dates for 2026 Admission

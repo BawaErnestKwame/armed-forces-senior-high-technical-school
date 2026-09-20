@@ -30,19 +30,19 @@ const DEPTS = [
     id: "technical",
     name: "Technical",
     img: technical,
-    to: "/academics/technical",
+    to: "/academics/technical/technical",
   },
   {
     id: "arts",
     name: "Visual Arts",
     img: visual,
-    to: "/academics/visual-arts",
+    to: "/academics/visualArts/visualArt",
   },
   {
     id: "business",
     name: "Business",
     img: business,
-    to: "/academics/business",
+    to: "/academics/business/business",
   },
 ];
 
@@ -152,7 +152,7 @@ const DeptCard = ({ dept, zIndex }) => {
       <div className="absolute inset-x-0 bottom-0 p-6 z-10 flex flex-col gap-3">
         {/* Department name */}
         <h3
-          className="font-['Playfair_Display'] text-[26px] font-black text-white
+          className="font-heading text-[26px] font-bold text-white
             transition-all duration-300 group-hover:-translate-y-2"
         >
           {dept.name}
@@ -206,7 +206,7 @@ const Departments = () => (
 
           {/* Heading */}
           <h2
-            className="font-['Playfair_Display'] text-[40px] font-black leading-[1.1]"
+            className="font-heading text-[40px] font-bold leading-[1.1]"
             style={{ color: C.royalBlueDark }}
           >
             Academic Department
@@ -255,7 +255,7 @@ const Departments = () => (
               </span>
             </div>
             <h2
-              className="font-['Playfair_Display'] text-[32px] font-black leading-[1.1]"
+              className="font-heading text-[32px] font-bold leading-[1.1]"
               style={{ color: C.royalBlueDark }}
             >
               Academic Department

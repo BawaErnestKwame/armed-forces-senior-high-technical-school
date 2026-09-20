@@ -63,7 +63,7 @@ const SignIn = () => {
               className="h-20 w-auto object-contain"
             />
           </div>
-          <h2 className="mt-4 text-2xl font-['Playfair_Display'] font-black text-[#261481]">
+          <h2 className="mt-4 text-2xl font-heading font-bold text-[#261481]">
             Sign in to your account
           </h2>
           <p className="mt-2 text-xs text-gray-600">

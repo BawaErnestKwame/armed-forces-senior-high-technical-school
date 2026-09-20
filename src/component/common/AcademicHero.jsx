@@ -39,7 +39,7 @@ const AcademicHero = ({ image, title, subtitle }) => (
     >
       <motion.h1
         variants={item}
-        className="font-['Playfair_Display'] font-black text-white mb-4"
+        className="font-heading font-bold text-white mb-4"
         style={{ fontSize: "clamp(38px, 6vw, 64px)" }}
       >
         {title}

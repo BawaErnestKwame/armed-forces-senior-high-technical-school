@@ -16,8 +16,8 @@ const SeniorIcon = () => (
 
 const LINKS = [
   { label: 'General Science', to: '/academics/general-science' },
-  { label: 'Technical',       to: '/academics/technical' },
-  { label: 'Business',        to: '/academics/business' },
+  { label: 'Technical',       to: '/academics/technical/technical' },
+  { label: 'Business',        to: '/academics/business/business' },
 ]
 
 const Senior = ({ open, onToggle, hasBorder }) => (

@@ -54,7 +54,7 @@ const SectionHeading = ({ eyebrow, title, center }) => (
       {eyebrow}
     </span>
     <h2
-      className="font-['Playfair_Display'] text-3xl sm:text-4xl font-black mt-2"
+      className="font-heading text-3xl sm:text-4xl font-bold mt-2"
       style={{ color: C.royalBlueDark }}
     >
       {title}
@@ -158,7 +158,7 @@ const FeatureCard = ({ title, img, desc }) => (
   >
     <img src={img} alt={title} className="w-full h-44 object-cover" />
     <div className="p-6">
-      <h4 className="font-['Playfair_Display'] text-lg font-bold text-gray-900 mb-2">
+      <h4 className="font-heading text-lg font-bold text-gray-900 mb-2">
         {title}
       </h4>
       <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
@@ -188,7 +188,7 @@ const SchooLife = () => {
             Life at AMESCO
           </span>
           <h2
-            className="font-['Playfair_Display'] text-3xl sm:text-4xl font-black mt-2 mb-5"
+            className="font-heading text-3xl sm:text-4xl font-bold mt-2 mb-5"
             style={{ color: C.royalBlueDark }}
           >
             More Than Academics
@@ -270,7 +270,7 @@ const SchooLife = () => {
           className="mx-6 lg:mx-24 mb-16 rounded-2xl px-8 py-14 text-center"
           style={{ background: `linear-gradient(135deg, ${C.royalBlueDark}, ${C.royalBlue})` }}
         >
-          <h2 className="font-['Playfair_Display'] text-3xl sm:text-4xl font-black text-white mb-3">
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mb-3">
             Ready to Become Part of Our Community?
           </h2>
           <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto mb-8">

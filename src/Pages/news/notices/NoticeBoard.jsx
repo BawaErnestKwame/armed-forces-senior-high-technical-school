@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Pin, Calendar, ArrowRight, Megaphone } from "lucide-react";
 import AcademicHero from "../../../component/common/AcademicHero";
-import heroImage from "../../../assets/banner.jpg";
+import heroImage from "../../../assets/gallery/gallery9.jpeg";
 import { notices, NOTICE_CATEGORIES } from "./noticesData";
 
 const C = {
@@ -77,7 +77,7 @@ const NoticeRow = ({ notice }) => (
             {notice.category}
           </span>
         </div>
-        <h3 className="font-['Playfair_Display'] text-lg font-bold text-gray-900 mb-1.5 leading-snug">
+        <h3 className="font-heading text-lg font-bold text-gray-900 mb-1.5 leading-snug">
           {notice.title}
         </h3>
         <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-1.5">

@@ -59,7 +59,7 @@ const ContactCard = () => (
           />
         </motion.div>
 
-        <h3 className="font-['Playfair_Display'] text-xl font-black text-white mt-6">
+        <h3 className="font-heading text-xl font-bold text-white mt-6">
           Need Help?
         </h3>
 

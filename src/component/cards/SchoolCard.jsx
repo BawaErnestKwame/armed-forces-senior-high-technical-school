@@ -58,7 +58,7 @@ const SchoolCard = ({ icon, title, desc, links, hasBorder, open, onToggle }) => 
       {/* Icon + Title */}
       <div className="flex items-start gap-4 mb-4">
         <div className="w-16 h-14 flex-shrink-0">{icon}</div>
-        <h3 className="font-['Playfair_Display'] text-[22px] font-black text-[#0a0850] leading-tight mt-1">
+        <h3 className="font-heading text-[22px] font-bold text-[#0a0850] leading-tight mt-1">
           {title}
         </h3>
       </div>
